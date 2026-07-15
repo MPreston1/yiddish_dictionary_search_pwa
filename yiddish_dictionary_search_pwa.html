@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Yiddish Dictionary">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<title>Yiddish Dictionary</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent:   #2A6EBB;
+    --bg:       #F5F5F7;
+    --card:     #FFFFFF;
+    --text:     #1D1D1F;
+    --muted:    #6E6E73;
+    --border:   #D2D2D7;
+    --hl:       #FFF3CD;
+    --red:      #FF3B30;
+    --green:    #34A853;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bot: env(safe-area-inset-bottom, 0px);
+  }
+
+  html, body { height: 100%; background: var(--bg); font-family: -apple-system, sans-serif; color: var(--text); }
+
+  /* ── Layout ── */
+  #app { display: flex; flex-direction: column; height: 100%; padding-top: var(--safe-top); padding-bottom: var(--safe-bot); }
+
+  /* ── Top bar ── */
+  #topbar { background: var(--card); border-bottom: 1px solid var(--border); padding: 10px 12px 8px; }
+  #topbar h1 { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  #btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .btn { border: none; border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .btn-blue  { background: var(--accent); color: #fff; }
+  .btn-green { background: var(--green);  color: #fff; }
+  .btn-red   { background: var(--red);    color: #fff; }
+  .btn-grey  { background: #888;          color: #fff; }
+
+  /* ── Search row ── */
+  #searchbar { display: flex; gap: 6px; align-items: center; padding: 8px 12px; background: var(--bg); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  #search-input { flex: 1; min-width: 120px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 15px; background: var(--card); color: var(--text); outline: none; -webkit-appearance: none; }
+  #search-input:focus { border-color: var(--accent); }
+  #search-btn { flex-shrink: 0; }
+  #options-row { display: flex; gap: 12px; align-items: center; padding: 4px 12px 6px; background: var(--bg); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  select { font-size: 12px; border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px; background: var(--card); color: var(--text); -webkit-appearance: none; appearance: none; padding-right: 18px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236E6E73'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 5px center; }
+
+  /* ── Result count ── */
+  .col-count { font-size: 11px; color: var(--muted); font-style: italic; padding: 3px 2px; }
+
+  /* ── Results (two columns: YCD + JNW, each scrolling independently) ── */
+  #results-columns { flex: 1; overflow: hidden; padding: 0 12px 12px; background: var(--bg); display: flex; gap: 10px; align-items: stretch; }
+  .result-col { flex: 1 1 0; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+  .result-col.hidden-col { display: none; }
+  .col-header { flex-shrink: 0; background: var(--bg); font-size: 12px; font-weight: 700; color: var(--text); padding: 8px 2px 2px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+  .col-header .col-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .col-header a.col-link { font-size: 11px; font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap; }
+  /* This is the actual scrollable element — each column scrolls on its own. */
+  .col-body { flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Stack columns on narrow screens; each still keeps its own scroll area. */
+  @media (max-width: 480px) {
+    #results-columns { flex-direction: column; }
+  }
+
+  .entry { background: var(--card); border-radius: 10px; margin-top: 10px; padding: 10px 12px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .term { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 4px; direction: ltr; unicode-bidi: embed; }
+  .defpara { font-size: 14px; color: var(--text); text-align: right; direction: rtl; unicode-bidi: embed; line-height: 1.5; margin-top: 3px; }
+  mark { background: var(--hl); color: inherit; border-radius: 2px; }
+
+  /* JNW entries (external, live) */
+  .jnw-entry { background: var(--card); border-radius: 10px; margin-top: 10px; padding: 10px 12px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .jnw-term-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+  .jnw-term { font-size: 15px; font-weight: 700; color: var(--accent); direction: ltr; unicode-bidi: embed; }
+  .jnw-open { font-size: 11px; color: var(--muted); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+  .jnw-snippet { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .jnw-meta { font-size: 12px; color: var(--muted); direction: ltr; unicode-bidi: embed; margin-bottom: 2px; }
+  .jnw-fallback { font-size: 12px; color: var(--muted); padding: 8px 2px; line-height: 1.5; }
+  .jnw-fallback a { color: var(--accent); }
+
+  /* ── Find bar ── */
+  #findbar { display: none; align-items: center; gap: 6px; padding: 6px 12px; background: var(--card); border-top: 1px solid var(--border); flex-wrap: nowrap; }
+  #findbar.open { display: flex; }
+  #find-input { flex: 1; border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; font-size: 14px; background: var(--bg); color: var(--text); outline: none; -webkit-appearance: none; min-width: 0; }
+  #find-input:focus { border-color: var(--accent); }
+  #find-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+  .find-btn { border: none; border-radius: 6px; padding: 5px 10px; font-size: 13px; font-weight: 600; cursor: pointer; background: var(--accent); color: #fff; white-space: nowrap; }
+  #find-close { background: #888; }
+
+  /* ── Modal overlays (shared by import modal + JNW backup modal) ── */
+  .ovl { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+  .ovl.open { display: flex; }
+  .ovl-panel { background: var(--card); border-radius: 14px; padding: 20px; width: 100%; max-width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,.25); }
+  .ovl-panel h2 { font-size: 16px; margin-bottom: 12px; }
+  .ovl-panel p  { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  #url-input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px; font-size: 14px; margin-bottom: 12px; outline: none; -webkit-appearance: none; }
+  #url-input:focus { border-color: var(--accent); }
+  .modal-progress { font-size: 12px; color: var(--muted); margin-bottom: 4px; min-height: 0; }
+  .modal-progress:empty { margin-bottom: 0; }
+  .modal-btns { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+  #modal-choose-file { width: 100%; }
+  #modal-or { text-align: center; color: var(--muted); font-size: 12px; }
+  #jnw-backup-log { font-size: 11px; max-height: 80px; overflow-y: auto; background: #f5f5f5; padding: 6px; border-radius: 6px; white-space: pre-wrap; margin-bottom: 8px; font-family: -apple-system, sans-serif; }
+  .settings-panel { max-width: 460px; max-height: 92vh; overflow-y: auto; padding: 16px; }
+  .settings-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .settings-header h2 { margin-bottom: 0; }
+  .settings-close-x { background: none; border: none; font-size: 20px; line-height: 1; color: var(--muted); cursor: pointer; padding: 2px 4px; flex-shrink: 0; }
+  .settings-close-x:hover { color: var(--text); }
+  .settings-section { margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .settings-section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .settings-section h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .settings-section p { margin-bottom: 6px; }
+
+
+  /* ── Empty / message ── */
+  .message { color: var(--muted); font-style: italic; font-size: 14px; padding: 20px 0; text-align: center; }
+
+  /* ── Spinner ── */
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #ccc; border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Top bar -->
+  <div id="topbar">
+    <h1>Yiddish Dictionary Search</h1>
+    <div id="btn-row">
+      <button class="btn btn-blue"  onclick="openSettings()">Settings</button>
+      <button class="btn btn-grey"  onclick="toggleFind()" style="margin-left:auto">Find</button>
+    </div>
+  </div>
+
+  <!-- Search bar -->
+  <div id="searchbar">
+    <input id="search-input" type="search" placeholder="Search…" autocorrect="off" autocapitalize="none" spellcheck="false">
+    <button class="btn btn-blue search-btn" id="search-btn" onclick="doSearch()">Search</button>
+  </div>
+  <div id="options-row">
+    <label>Search: <select id="dict-scope" onchange="applyDictScope()">
+      <option value="both">Both dictionaries</option>
+      <option value="ycd">YCD only</option>
+      <option value="jnw">JNW only</option>
+    </select></label>
+    <label><input type="checkbox" id="whole-word"> Whole word</label>
+    <label><input type="checkbox" id="exact-phrase" title="Match words adjacent and in order"> Exact phrase</label>
+    <label><input type="checkbox" id="jnw-display-all"> Display all results including related terms (JNW only)</label>
+  </div>
+
+  <!-- Results: two columns, YCD (local import) + JNW (live external search) -->
+  <div id="results-columns">
+    <div class="result-col" id="col-ycd">
+      <div class="col-header">
+        <span class="col-title">YCD (yiddishculturaldictionary.org)</span>
+        <span class="col-count" id="count-ycd"></span>
+      </div>
+      <div class="col-body" id="results-ycd"><p class="message">Type a word and tap Search.</p></div>
+    </div>
+    <div class="result-col" id="col-jnw">
+      <div class="col-header">
+        <span class="col-title" id="jnw-col-title">JNW (jiddischwoordenboek.nl)</span>
+        <span class="col-count" id="count-jnw"></span>
+      </div>
+      <div class="col-body" id="results-jnw"><p class="message">Type a word and tap Search.</p></div>
+    </div>
+  </div>
+
+  <!-- Find bar -->
+  <div id="findbar">
+    <input id="find-input" type="search" placeholder="Find in results…" autocorrect="off" autocapitalize="none" spellcheck="false" oninput="findReset()" onkeydown="if(event.key==='Enter')findNext()">
+    <button class="find-btn" onclick="findPrev()">‹</button>
+    <button class="find-btn" onclick="findNext()">›</button>
+    <span id="find-count"></span>
+    <button class="find-btn" id="find-close" onclick="closeFind()">✕</button>
+  </div>
+</div>
+
+<!-- Settings modal (YCD + JNW, each in their own section) -->
+<div id="settings-overlay" class="ovl">
+  <div class="ovl-panel settings-panel">
+    <div class="settings-header">
+      <h2>Settings</h2>
+      <button class="settings-close-x" onclick="closeSettings()" aria-label="Close settings">✕</button>
+    </div>
+
+    <section class="settings-section">
+      <h3>Settings for YCD</h3>
+      <div id="ycd-status" class="modal-progress" style="margin-bottom:6px;">No dictionary loaded.</div>
+      <p>Import from a file already on this device:</p>
+      <button class="btn btn-blue" id="modal-choose-file" onclick="document.getElementById('file-input').click()">Choose File…</button>
+      <p id="modal-or" style="margin-top:8px">— or import from a URL —</p>
+      <input id="url-input" type="url" value="https://yiddishculturaldictionary.org/" onkeydown="if(event.key==='Enter')startWebImport()">
+      <div class="modal-progress" id="modal-progress"></div>
+      <div class="modal-btns">
+        <button class="btn btn-red"   onclick="clearDictionary()">Clear YCD</button>
+        <button class="btn btn-blue" onclick="startWebImport()">Import from URL</button>
+        <button class="btn btn-green" id="ycd-backup-download" onclick="downloadYCDBackup()" disabled>Download JSON</button>
+      </div>
+    </section>
+
+    <section class="settings-section">
+      <h3>Settings for JNW</h3>
+
+      <div id="jnw-offline-status" class="modal-progress" style="margin-bottom:6px;">No local backup loaded.</div>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:8px;">
+        <input type="checkbox" id="jnw-offline-toggle" onchange="setJNWOfflineMode(this.checked)" disabled>
+        Search JNW from this local backup instead of the live site
+      </label>
+
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <button class="btn btn-blue" id="jnw-import-backup-btn" style="flex:1;" onclick="document.getElementById('jnw-backup-file-input').click()">Import Backup File…</button>
+        <button class="btn btn-red" id="jnw-clear-backup-btn" style="flex:1;" onclick="clearJNWBackup()" disabled>Clear Local Backup</button>
+      </div>
+      <input type="file" id="jnw-backup-file-input" accept="application/json,.json" style="display:none" onchange="handleJNWBackupFile(this)">
+
+      <p style="margin-top:2px;border-top:1px solid var(--border);padding-top:8px;">Or build a fresh backup by crawling jiddischwoordenboek.nl letter-by-letter (base letters + diacritics). This makes many requests and can take a few minutes.</p>
+
+      <div style="display:flex;gap:8px;align-items:center;margin:6px 0;">
+        <select id="jnw-single-letter-select" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--card);color:var(--text);"></select>
+        <button class="btn btn-blue" id="jnw-single-letter-btn" onclick="startJNWSingleLetterCrawl()">Crawl This Letter Only</button>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:-2px;margin-bottom:8px;">Runs just one letter/diacritic and adds it to whatever backup already exists — useful for testing or topping up without re-running everything.</p>
+
+      <div class="modal-progress" id="jnw-backup-progress"></div>
+      <pre id="jnw-backup-log"></pre>
+      <div class="modal-btns">
+        <button class="btn btn-red"   id="jnw-backup-cancel" onclick="cancelJNWBackup()" disabled>Cancel Crawl</button>
+        <button class="btn btn-blue"  id="jnw-backup-start" onclick="startJNWBackup()">Start Crawl</button>
+        <button class="btn btn-green" id="jnw-backup-download" onclick="downloadJNWBackup()" disabled>Download JSON</button>
+      </div>
+      <div class="modal-btns" id="jnw-backup-pause-btns" style="display:none;margin-top:8px;">
+        <button class="btn btn-red"  onclick="jnwCrawlStop()">Stop Here</button>
+        <button class="btn btn-blue" onclick="jnwCrawlContinue()">Continue to Next Letter</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Hidden file input -->
+<input id="file-input" type="file" accept=".html,.htm" style="display:none" onchange="handleFile(this)">
+
+<script>
+'use strict';
+
+// ── Unicode normalization ───────────────────────────────────────────────────
+// normalizeYiddishWithMap() is the single source of truth for every rule
+// below. It walks the original text once, left to right, and for each
+// "chunk" it consumes (1 original char that expands to 2, or 2 original
+// chars that collapse to 1, or an ordinary passthrough char) it records
+// both the normalized-text range and the original-text range that chunk
+// came from. This lets callers that only need the normalized string ignore
+// the map (see normalizeYiddish() below), while callers that need to
+// highlight matches in the *original* text (see highlightTokens()) can
+// convert a match found in normalized coordinates back to original
+// coordinates.
+//
+// Rule behavior is identical to the previous chained-.replace() version,
+// with one correction: U+FB1F is now fully decomposed all the way down to
+// its primitive letters, matching what U+05F2 already produces on its own.
+//   U+05F2 (Yod-Yod ligature, "double yod")            -> U+05D9 + U+05D9
+//   U+FB1F (Yod-Yod-Patah ligature)                    -> U+05D9 + U+05D9 + U+05B7
+//   U+05F0 (Vov-Vov ligature, "double vov")             -> U+05D5 + U+05D5
+//   U+05F1 (Vov-Yod ligature)                           -> U+05D5 + U+05D9
+//   U+05D1 + U+05BF (Vet, "bet" + rafe)                 -> U+05D1
+//   U+05E4 + U+05BF (Fey, "pey" + rafe)                 -> U+05E4
+//   U+05D5 + U+05BC (Vov + dagesh, "vov melupm")        -> U+05D5
+//   U+05EA + U+05BC (Tav + dagesh)                       -> U+05EA
+// FB1F is fully expanded (rather than left as U+05F2 + U+05B7) because text
+// sourced from different places encodes "pasekh tsvey yudn" inconsistently:
+// some as the single precomposed U+FB1F character, some as a separate
+// U+05F2 ligature followed by a combining patah, and some as fully spelled-
+// out keyboard input (two plain yuds + patah). Since the loop only checks
+// each rule against characters in the *original* text (it never re-scans
+// its own output), leaving FB1F at the intermediate U+05F2 + U+05B7 stage
+// meant it could never reach the same fully-decomposed form the other two
+// encodings produce -- so a word stored with a precomposed FB1F would never
+// match the same word typed on a keyboard. Fully decomposing all three
+// representations down to the same primitive letters fixes that. Pey +
+// dagesh (U+05BC, "פּ") is a distinct letter and is intentionally left
+// untouched, same as before.
+function normalizeYiddishWithMap(text) {
+  let normalized = '';
+  const chunks = []; // { normStart, normEnd, origStart, origEnd }
+  let i = 0;
+  while (i < text.length) {
+    const c  = text[i];
+    const c2 = i + 1 < text.length ? text[i + 1] : '';
+    let out, consumed;
+    if (c === '\u05F2')                        { out = '\u05D9\u05D9'; consumed = 1; }
+    else if (c === '\uFB1F')                    { out = '\u05D9\u05D9\u05B7'; consumed = 1; }
+    else if (c === '\u05F0')                    { out = '\u05D5\u05D5'; consumed = 1; }
+    else if (c === '\u05F1')                    { out = '\u05D5\u05D9'; consumed = 1; }
+    else if (c === '\u05D1' && c2 === '\u05BF') { out = '\u05D1';       consumed = 2; }
+    else if (c === '\u05E4' && c2 === '\u05BF') { out = '\u05E4';       consumed = 2; }
+    else if (c === '\u05D5' && c2 === '\u05BC') { out = '\u05D5';       consumed = 2; }
+    else if (c === '\u05EA' && c2 === '\u05BC') { out = '\u05EA';       consumed = 2; }
+    else                                         { out = c;              consumed = 1; }
+
+    const normStart = normalized.length;
+    normalized += out;
+    chunks.push({ normStart, normEnd: normalized.length, origStart: i, origEnd: i + consumed });
+    i += consumed;
+  }
+  return { normalized, chunks };
+}
+
+function normalizeYiddish(text) {
+  return normalizeYiddishWithMap(text).normalized;
+}
+
+// Finds the chunk containing a given index into the normalized string
+// (0 <= idx < chunks-covered length). Used to map a match found in
+// normalized coordinates back to the original text's coordinates.
+function findChunkForNormIndex(chunks, idx) {
+  let lo = 0, hi = chunks.length - 1;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    const ch = chunks[mid];
+    if (idx < ch.normStart) hi = mid - 1;
+    else if (idx >= ch.normEnd) lo = mid + 1;
+    else return ch;
+  }
+  return null;
+}
+
+// ── State ────────────────────────────────────────────────────────────────────
+let appData = { source_name: null, download_date: '', entries: [] };
+let currentMatches = [];   // entries from last search
+let findMatches   = [];    // DOM text nodes + offsets for find-in-page
+let findIndex     = -1;
+
+// ── Persistence via IndexedDB ─────────────────────────────────────────────────
+// IndexedDB is far more persistent than localStorage on iOS PWAs --
+// Safari does not evict it the way it does localStorage.
+const IDB_NAME    = 'DictionaryApp';
+const IDB_STORE   = 'data';
+const IDB_VERSION = 1;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(IDB_NAME, IDB_VERSION);
+    req.onupgradeneeded = e => {
+      e.target.result.createObjectStore(IDB_STORE);
+    };
+    req.onsuccess = e => resolve(e.target.result);
+    req.onerror   = e => reject(e.target.error);
+  });
+}
+
+async function saveData() {
+  try {
+    const db  = await openDB();
+    const tx  = db.transaction(IDB_STORE, 'readwrite');
+    const st  = tx.objectStore(IDB_STORE);
+    // Store metadata and entries separately so we can load metadata fast
+    st.put({ source_name: appData.source_name,
+              download_date: appData.download_date }, 'meta');
+    st.put(appData.entries, 'entries');
+    await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; });
+    db.close();
+  } catch(e) {
+    // Fall back to localStorage if IndexedDB fails
+    try { localStorage.setItem('dict_backup', JSON.stringify(appData)); } catch(_) {}
+    console.warn('IndexedDB save failed:', e);
+  }
+}
+
+async function loadData() {
+  try {
+    const db  = await openDB();
+    const tx  = db.transaction(IDB_STORE, 'readonly');
+    const st  = tx.objectStore(IDB_STORE);
+    const meta    = await new Promise((res, rej) => {
+      const r = st.get('meta'); r.onsuccess = () => res(r.result); r.onerror = rej;
+    });
+    const entries = await new Promise((res, rej) => {
+      const r = st.get('entries'); r.onsuccess = () => res(r.result); r.onerror = rej;
+    });
+    db.close();
+    if (meta && entries) {
+      appData = { ...meta, entries };
+      return true;
+    }
+  } catch(e) {
+    console.warn('IndexedDB load failed:', e);
+  }
+  // Try localStorage fallback
+  try {
+    const raw = localStorage.getItem('dict_backup');
+    if (raw) { appData = JSON.parse(raw); return true; }
+  } catch(_) {}
+  return false;
+}
+
+// ── JNW local backup storage (separate keys, same IndexedDB store) ─────────
+async function saveJNWBackupToDB(meta, entries) {
+  try {
+    const db = await openDB();
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    const st = tx.objectStore(IDB_STORE);
+    st.put(meta, 'jnw_backup_meta');
+    st.put(entries, 'jnw_backup_entries');
+    await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; });
+    db.close();
+  } catch (e) {
+    console.warn('JNW backup save failed:', e);
+  }
+}
+
+async function loadJNWBackupFromDB() {
+  try {
+    const db = await openDB();
+    const tx = db.transaction(IDB_STORE, 'readonly');
+    const st = tx.objectStore(IDB_STORE);
+    const meta = await new Promise((res, rej) => {
+      const r = st.get('jnw_backup_meta'); r.onsuccess = () => res(r.result); r.onerror = rej;
+    });
+    const entries = await new Promise((res, rej) => {
+      const r = st.get('jnw_backup_entries'); r.onsuccess = () => res(r.result); r.onerror = rej;
+    });
+    db.close();
+    if (meta && entries) return { meta, entries };
+  } catch (e) {
+    console.warn('JNW backup load failed:', e);
+  }
+  return null;
+}
+
+async function clearJNWBackupFromDB() {
+  try {
+    const db = await openDB();
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    const st = tx.objectStore(IDB_STORE);
+    st.delete('jnw_backup_meta');
+    st.delete('jnw_backup_entries');
+    await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; });
+    db.close();
+  } catch (e) {
+    console.warn('JNW backup clear failed:', e);
+  }
+}
+
+// ── HTML parsing (mirrors Python logic) ──────────────────────────────────────
+const STOP_TERM = 'Notes, Abbreviations & Symbols';
+
+function parseHTML(html) {
+  // Pre-processing: remove malformed tags that cause false entry splits
+  html = html.replace(/<p[^>]*><\/main><\/p>\s*/gi, '');
+  html = html.replace(/<p[^>]*><main[^>]*><\/p>\s*/gi, '');
+  // Remove <p> tags containing only an <img> -- they become false sentinels
+  html = html.replace(/<p[^>]*>\s*(?:<a[^>]*>)?\s*<img[^>]*\/?>[^<]*(?:<\/a>)?\s*<\/p>\s*/gi, '');
+
+  const parser  = new DOMParser();
+  const doc     = parser.parseFromString(html, 'text/html');
+
+  const firstMain = doc.querySelector('main');
+  if (!firstMain) return [];
+
+  const allParas = Array.from(doc.querySelectorAll('p'));
+  const paras = [];
+  for (const p of allParas) {
+    const pos = firstMain.compareDocumentPosition(p);
+    if (!(pos & 4) && !(pos & 16)) continue;
+    let text = p.textContent;
+    const stripped = text.replace(/\u00a0/g, '').replace(/&nbsp;/g, '').trim();
+    if (stripped === '') {
+      paras.push('');
+    } else {
+      text = text.replace(/\u00a0/g, ' ').replace(/&nbsp;/g, ' ').trim();
+      paras.push(text);
+    }
+  }
+
+  // Helper functions
+  function startsWithLatin(text) {
+    for (const c of text) {
+      const cp = c.codePointAt(0);
+      if ((cp >= 65 && cp <= 90) || (cp >= 97 && cp <= 122)) return true;
+      if ((cp >= 0x0590 && cp <= 0x05ff) || (cp >= 0xfb1d && cp <= 0xfb4f)) return false;
+    }
+    return false;
+  }
+
+  function splitMixedPara(text) {
+    // Split a paragraph that starts with a Latin term followed by Hebrew.
+    // Does NOT split paragraphs that start with Hebrew (definitions with
+    // transliteration in brackets should not be mistaken for terms).
+    if (!startsWithLatin(text)) return null;
+    let inLatin = false;
+    for (let i = 0; i < text.length; i++) {
+      const cp = text.codePointAt(i);
+      if ((cp >= 65 && cp <= 90) || (cp >= 97 && cp <= 122)) inLatin = true;
+      if (inLatin && ((cp >= 0x0590 && cp <= 0x05ff) || (cp >= 0xfb1d && cp <= 0xfb4f))) {
+        let splitPos = i;
+        while (splitPos > 0 && (text[splitPos-1] === ' ' || text[splitPos-1] === '\u00a0')) splitPos--;
+        const termPart = text.slice(0, splitPos).trim();
+        const defPart  = text.slice(splitPos).trim();
+        if (termPart && defPart) return [termPart, defPart];
+      }
+    }
+    return null;
+  }
+
+  function cleanTerm(text) {
+    // Strip leading non-Latin characters (e.g. stray Hebrew prefix chars like ך)
+    for (let i = 0; i < text.length; i++) {
+      const cp = text.codePointAt(i);
+      if ((cp >= 65 && cp <= 90) || (cp >= 97 && cp <= 122)) return text.slice(i).trim();
+    }
+    return text.trim();
+  }
+
+  const entries = [];
+
+  // Some source paragraphs contain an unbalanced term due to authoring
+  // mistakes in the original HTML (see cleanTerm's note above about
+  // stray leading characters) -- most commonly a missing closing
+  // parenthesis, e.g. "advanced (academic level" with no ")". Rather
+  // than silently leaving the term malformed, auto-append the missing
+  // closing parenthes(es) and record a note on the entry so this is
+  // visible (e.g. in the exported backup JSON) rather than silently
+  // "fixed" and forgotten.
+  function pushEntry(rawTerm, definition) {
+    const term   = cleanTerm(rawTerm);
+    const opens  = (term.match(/\(/g)  || []).length;
+    const closes = (term.match(/\)/g) || []).length;
+    const missing = opens - closes;
+    if (missing > 0) {
+      entries.push({
+        term: term + ')'.repeat(missing),
+        definition,
+        note: `Auto-added ${missing} closing parenthes${missing === 1 ? 'is' : 'es'} ` +
+              `(source term was unbalanced: "${term}")`
+      });
+    } else {
+      entries.push({ term, definition });
+    }
+  }
+
+  let current = [];
+  let i = 0;
+
+  while (i < paras.length) {
+    const para = paras[i];
+
+    if (para === '') {
+      if (current.length > 0) {
+        // Lookahead: find next non-blank paragraph
+        let j = i + 1;
+        while (j < paras.length && paras[j] === '') j++;
+        const nextPara = j < paras.length ? paras[j] : '';
+
+        if (nextPara.trim() === STOP_TERM) {
+          if (current[0].trim() !== STOP_TERM)
+            pushEntry(current[0], current.slice(1));
+          break;
+        }
+
+        if (startsWithLatin(nextPara) || !nextPara) {
+          // Next para starts with Latin -> genuine end of entry
+          if (current[0].trim() !== STOP_TERM)
+            pushEntry(current[0], current.slice(1));
+          current = [];
+        }
+        // else: next para starts with Hebrew -> internal blank, keep going
+      }
+      i++;
+      continue;
+    }
+
+    if (current.length === 0) {
+      if (para.trim() === STOP_TERM) break;
+
+      // Handle newline-separated term+definition (from <br/> in HTML)
+      if (para.includes('\n')) {
+        const parts = para.split('\n').map(p => p.trim()).filter(Boolean);
+        if (parts.length > 1 && startsWithLatin(parts[0])) {
+          current.push(cleanTerm(parts[0]));
+          for (let k = 1; k < parts.length; k++) current.push(parts[k]);
+          i++;
+          continue;
+        }
+      }
+
+      // Handle &nbsp;-separated term+definition in the same paragraph
+      const split = splitMixedPara(para);
+      if (split) {
+        current.push(cleanTerm(split[0]));
+        current.push(split[1]);
+        i++;
+        continue;
+      }
+
+      current.push(para);
+    } else {
+      current.push(para);
+    }
+    i++;
+  }
+
+  if (current.length > 0 && current[0].trim() !== STOP_TERM)
+    pushEntry(current[0], current.slice(1));
+
+  return entries;
+}
+
+// ── Bidi term display (mirrors Python logic) ──────────────────────────────────
+const MIRROR = {'(':')',')':'(','[':']',']':'[','{':'}','}':'{','<':'>','>':'<'};
+function mirrorChar(c) { return MIRROR[c] || c; }
+
+function bidiTermDisplay(text) {
+  if (!text) return text;
+  // Find first strong LTR character
+  let first = -1;
+  for (let i = 0; i < text.length; i++) {
+    const cp = text.codePointAt(i);
+    // Latin, Greek, Cyrillic, digits etc — not Hebrew (0x0590–0x05FF)
+    if ((cp >= 0x41 && cp <= 0x5A) || (cp >= 0x61 && cp <= 0x7A) ||
+        (cp >= 0x30 && cp <= 0x39) || (cp >= 0xC0 && cp <= 0x2AF) ||
+        (cp >= 0x370 && cp <= 0x52F)) {
+      first = i; break;
+    }
+  }
+  if (first <= 0) return text;
+  const leading = text.slice(0, first);
+  const rest    = text.slice(first);
+  return rest + [...leading].reverse().map(mirrorChar).join('');
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+function doSearch() {
+  const query = document.getElementById('search-input').value.trim();
+
+  const wholeWord    = document.getElementById('whole-word').checked;
+  const exactPhrase  = document.getElementById('exact-phrase').checked;
+  const jnwDisplayAll = document.getElementById('jnw-display-all').checked;
+  const scope = document.getElementById('dict-scope').value; // 'both' | 'ycd' | 'jnw'
+
+  // Kick off the JNW live search in parallel; it has its own loading/empty
+  // states. JNW's own API has no scope/whole-word/exact-phrase options, so
+  // "whole word" and "exact phrase" are applied by filtering JNW's results
+  // client-side (see filterJNWEntriesByTerm); "term or definition" scope
+  // doesn't apply to JNW at all, since it always searches across its own
+  // fields.
+  if (scope !== 'ycd') {
+    searchJNW(query, { wholeWord, exactPhrase, displayAll: jnwDisplayAll });
+  }
+
+  if (scope === 'jnw') {
+    // YCD column is hidden; nothing more to do on that side.
+    closeFind(true);
+    return;
+  }
+
+  const entries   = appData.entries;
+  const results   = document.getElementById('results-ycd');
+  const countEl   = document.getElementById('count-ycd');
+
+  if (!entries.length) {
+    results.innerHTML = '<p class="message">No dictionary loaded.</p>';
+    countEl.textContent = '';
+    return;
+  }
+  if (!query) {
+    results.innerHTML = '<p class="message">Type a word and tap Search.</p>';
+    countEl.textContent = `${entries.length.toLocaleString()} entries loaded`;
+    return;
+  }
+
+  // Normalize so U+FB1F matches keyboard-typed U+05F2+U+05B7
+  const qNorm  = normalizeYiddish(query.toLowerCase());
+  const tokens = qNorm.split(/\s+/).filter(Boolean);
+
+  const WB_PRE  = '(?<![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
+  const WB_POST = '(?![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
+
+  function entryMatches(term, defnText) {
+    const t = normalizeYiddish(term.toLowerCase());
+    const d = normalizeYiddish(defnText.toLowerCase());
+    if (exactPhrase && wholeWord) {
+      // Both conditions together: the whole phrase, adjacent/in-order,
+      // AND bounded by word boundaries at its start and end (so it can't
+      // be embedded inside a longer word).
+      const re = new RegExp(WB_PRE + escapeRegex(qNorm) + WB_POST, 'u');
+      return re.test(t) || re.test(d);
+    }
+    if (exactPhrase) {
+      return t.includes(qNorm) || d.includes(qNorm);
+    }
+    for (const token of tokens) {
+      const tok = hay => wholeWord
+        ? new RegExp(WB_PRE + escapeRegex(token) + WB_POST, 'u').test(hay)
+        : hay.includes(token);
+      if (!tok(t) && !tok(d)) return false;
+    }
+    return true;
+  }
+
+  currentMatches = entries.filter(e => entryMatches(e.term, e.definition.join(' ')));
+  const count = currentMatches.length;
+  countEl.textContent = `${count.toLocaleString()} match${count !== 1 ? 'es' : ''} for "${query}"`;
+
+  // For exact-phrase mode, highlight only the full phrase as one unit.
+  // For normal mode, highlight each individual token.
+  const hlTokens = exactPhrase ? [qNorm] : tokens;
+  renderResults(currentMatches, hlTokens);
+  // Reset find state
+  closeFind(true);
+}
+
+function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+// ── Dictionary scope (both / YCD only / JNW only) ──────────────────────────────
+function applyDictScope() {
+  const scope = document.getElementById('dict-scope').value;
+  const colYcd = document.getElementById('col-ycd');
+  const colJnw = document.getElementById('col-jnw');
+
+  colYcd.classList.toggle('hidden-col', scope === 'jnw');
+  colJnw.classList.toggle('hidden-col', scope === 'ycd');
+
+  try { localStorage.setItem('dictScope', scope); } catch (e) {}
+
+  // Re-run the current search (if any) under the new scope so the visible
+  // column(s) reflect it immediately rather than showing stale results.
+  doSearch();
+}
+
+// ── Rendering ─────────────────────────────────────────────────────────────────
+function renderResults(entries, tokens) {
+  const container = document.getElementById('results-ycd');
+  if (!entries.length) {
+    container.innerHTML = '<p class="message">No matches found.</p>';
+    return;
+  }
+
+  const frag = document.createDocumentFragment();
+  for (const entry of entries) {
+    const div = document.createElement('div');
+    div.className = 'entry';
+
+    // Term
+    const termDiv = document.createElement('div');
+    termDiv.className = 'term';
+    termDiv.innerHTML = highlightTokens(bidiTermDisplay(entry.term), tokens);
+    div.appendChild(termDiv);
+
+    // Definition paragraphs
+    for (const para of entry.definition) {
+      const p = document.createElement('div');
+      p.className = 'defpara';
+      p.innerHTML = highlightTokens(para, tokens);
+      div.appendChild(p);
+    }
+
+    frag.appendChild(div);
+  }
+  container.innerHTML = '';
+  container.appendChild(frag);
+}
+
+function highlightTokens(text, tokens) {
+  if (!tokens || !tokens.length) return escapeHTML(text);
+
+  // Find match positions against the normalized text (so e.g. ײ/יי and
+  // בֿ/ב are treated as equivalent when matching), but keep a map back to
+  // the original text so the HTML we build preserves whatever the
+  // original characters actually were (e.g. a rafe diacritic that
+  // normalization would otherwise have discarded).
+  const { normalized, chunks } = normalizeYiddishWithMap(text);
+  const lower = normalized.toLowerCase();
+  const ranges = [];
+  for (const token of tokens) {
+    let pos = 0;
+    while (true) {
+      const idx = lower.indexOf(token, pos);
+      if (idx === -1) break;
+      ranges.push([idx, idx + token.length]);
+      pos = idx + token.length;
+    }
+  }
+  if (!ranges.length) return escapeHTML(text);
+
+  // Map each normalized-coordinate range to original-text coordinates.
+  // If a match only partially overlaps a chunk (e.g. it lands on just one
+  // of the two characters an expanded ligature produced), we round
+  // outward to the whole original character(s) that chunk came from,
+  // since a single original character can't be half-highlighted.
+  const origRanges = ranges.map(([s, e]) => {
+    const startChunk = findChunkForNormIndex(chunks, s);
+    const endChunk   = findChunkForNormIndex(chunks, e - 1);
+    return [startChunk.origStart, endChunk.origEnd];
+  });
+
+  // Merge overlapping ranges (now in original-text coordinates; rounding
+  // outward above can occasionally cause new overlaps)
+  origRanges.sort((a, b) => a[0] - b[0]);
+  const merged = [origRanges[0]];
+  for (const [s, e] of origRanges.slice(1)) {
+    if (s <= merged[merged.length - 1][1])
+      merged[merged.length - 1][1] = Math.max(merged[merged.length - 1][1], e);
+    else merged.push([s, e]);
+  }
+
+  // Build HTML from the ORIGINAL text, not the normalized text
+  let html = '', pos = 0;
+  for (const [s, e] of merged) {
+    if (s > pos) html += escapeHTML(text.slice(pos, s));
+    html += `<mark>${escapeHTML(text.slice(s, e))}</mark>`;
+    pos = e;
+  }
+  if (pos < text.length) html += escapeHTML(text.slice(pos));
+  return html;
+}
+
+function escapeHTML(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── JNW live search (jiddischwoordenboek.nl) ────────────────────────────────
+// JNW's site is a client-rendered Vue app, but it's backed by a JSON search
+// API that the app itself calls (found by inspecting the Network tab):
+//   https://jiddischwoordenboek.nl/api/search?q.all_zoek=<query>&start=0&rows=<n>
+// We call that directly rather than scraping the rendered page.
+let jnwSearchToken = 0;
+const JNW_ROWS = 200; // how many hits to request per page (server appears to actually cap real page size around 100)
+const JNW_LIVE_FETCH_CAP = 500; // live search pages up to this many total results before stopping, to balance completeness vs speed
+
+function jnwApiUrl(query, start = 0, rows = JNW_ROWS) {
+  return `https://jiddischwoordenboek.nl/api/search?q.all_zoek=${encodeURIComponent(query)}&start=${start}&rows=${rows}`;
+}
+
+function jnwWebUrl(query) {
+  // A link a person can open in a browser to see the same search on JNW itself.
+  return `https://jiddischwoordenboek.nl/?zoek=${encodeURIComponent(query)}`;
+}
+
+async function fetchWithTimeout(url, opts, ms) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { ...opts, signal: ctrl.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Try a direct fetch, then a chain of public CORS proxies (each capped with
+// its own timeout so one slow/dead proxy doesn't stall the whole search).
+// Proxies come and go, so having more than one to fall back to matters.
+async function fetchWithCorsFallback(url) {
+  const attempts = [
+    { name: 'direct',       fetch: () => fetchWithTimeout(url, { headers: { 'Accept': 'application/json' } }, 8000) },
+    { name: 'allorigins',   fetch: () => fetchWithTimeout(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`, {}, 9000) },
+    { name: 'codetabs',     fetch: () => fetchWithTimeout(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`, {}, 9000) },
+    { name: 'corsproxy.io', fetch: () => fetchWithTimeout(`https://corsproxy.io/?url=${encodeURIComponent(url)}`, {}, 9000) },
+  ];
+
+  const errors = [];
+  for (const attempt of attempts) {
+    try {
+      const resp = await attempt.fetch();
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const text = await resp.text();
+      if (!text) throw new Error('empty response');
+      fetchWithCorsFallback.lastVia = attempt.name; // diagnostic only — which channel actually served this
+      return text;
+    } catch (err) {
+      const msg = err.name === 'AbortError' ? 'timed out' : err.message;
+      errors.push(`${attempt.name}: ${msg}`);
+    }
+  }
+  throw new Error(errors.join('; '));
+}
+
+// Pages live JNW search results up to `cap` total entries, advancing by
+// however many the server actually returns per page (see the crawl code
+// above for why — it caps real page size well below what `rows` requests).
+// Cache-busted for the same reason the crawl is: proxies can serve stale
+// pages otherwise. Stops early on error/parse-failure after the first page
+// so a flaky later page doesn't blank out results we already have.
+async function fetchJNWLivePaged(query, cap) {
+  let start = 0;
+  let numFound = null;
+  const all = [];
+  let firstPageError = null;
+  let firstPageParseFailed = null;
+
+  while (true) {
+    const url = jnwApiUrl(query, start, JNW_ROWS) + `&_cb=${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    let raw;
+    try {
+      raw = await fetchWithCorsFallback(url);
+    } catch (err) {
+      if (start === 0) firstPageError = err;
+      break;
+    }
+
+    let parsed;
+    try { parsed = parseJNWApiResponse(raw); } catch (e) { parsed = null; }
+    if (!parsed) {
+      if (start === 0) firstPageParseFailed = raw;
+      break;
+    }
+
+    numFound = parsed.numFound;
+    all.push(...parsed.entries);
+    const pageSize = parsed.entries.length;
+    if (pageSize === 0 || all.length >= numFound || all.length >= cap) break;
+    start += pageSize;
+    await new Promise(r => setTimeout(r, 150)); // small courtesy pause between pages
+  }
+
+  return { entries: all, numFound: numFound ?? all.length, firstPageError, firstPageParseFailed };
+}
+
+async function searchJNW(query, opts = {}) {
+  const { wholeWord = false, exactPhrase = false, displayAll = false } = opts;
+  const token = ++jnwSearchToken; // lets a newer search cancel an older, in-flight one
+  const container = document.getElementById('results-jnw');
+  const countEl    = document.getElementById('count-jnw');
+
+  if (!query) {
+    container.innerHTML = '<p class="message">Type a word and tap Search.</p>';
+    countEl.textContent = '';
+    return;
+  }
+
+  container.innerHTML = '<p class="message"><span class="spinner"></span> Searching JNW…</p>';
+  countEl.textContent = '';
+
+  const webUrl = jnwWebUrl(query);
+  const offline = jnwOfflineModeActive();
+
+  let entries, numFound;
+
+  if (offline) {
+    ({ entries, numFound } = searchJNWLocalBackup(query));
+  } else {
+    const result = await fetchJNWLivePaged(query, JNW_LIVE_FETCH_CAP);
+    if (token !== jnwSearchToken) return; // a newer search superseded this one
+
+    if (result.firstPageError) {
+      container.innerHTML = `<div class="jnw-fallback">Couldn't reach JNW (${escapeHTML(result.firstPageError.message)}).
+        <a href="${webUrl}" target="_blank" rel="noopener">Search on jiddischwoordenboek.nl ↗</a></div>`;
+      return;
+    }
+
+    if (result.firstPageParseFailed) {
+      // Couldn't confidently parse the response — don't guess. Show a link
+      // out, plus the raw text we actually received so this can be fixed
+      // without needing browser dev tools.
+      const raw = result.firstPageParseFailed;
+      const preview = raw.length > 8000 ? raw.slice(0, 8000) + '\n…(truncated)' : raw;
+      container.innerHTML = `<div class="jnw-fallback">Couldn't parse JNW's response.
+        <a href="${webUrl}" target="_blank" rel="noopener">Open the search on jiddischwoordenboek.nl ↗</a>
+        <details style="margin-top:8px;">
+          <summary style="cursor:pointer;">Show raw response received (for debugging)</summary>
+          <textarea readonly style="width:100%;height:200px;font-size:10px;margin-top:6px;" onclick="this.select()">${escapeHTML(preview)}</textarea>
+        </details></div>`;
+      return;
+    }
+
+    ({ entries, numFound } = result);
+  }
+
+  // JNW's own API has no "whole word" / "exact phrase" options, and its
+  // own matching logic is broader than a literal headword match (it seems
+  // to also match on other fields and/or do fuzzy matching). So unless
+  // "Display all" is checked, we always filter down to entries whose
+  // headword (trefwoord) literally contains the searched sequence — this
+  // is the JNW-side default now. If "Whole word" is also checked, that
+  // filter is additionally required to land on word boundaries (which,
+  // combined with the phrase-adjacency the default already requires, is
+  // the same "both conditions together" combination used on the YCD side).
+  const filtered = displayAll
+    ? entries
+    : filterJNWEntriesByTerm(entries, query, { wholeWord });
+
+  const fetchedNote = entries.length < numFound ? ` (${numFound.toLocaleString()} total on JNW)` : '';
+
+  // Same tokenization approach as YCD's highlighter, so the same searched
+  // word(s) get highlighted in JNW's results too.
+  const qNormJ    = normalizeYiddish(query.toLowerCase());
+  const tokensJ   = qNormJ.split(/\s+/).filter(Boolean);
+  const hlTokensJ = exactPhrase ? [qNormJ] : tokensJ;
+
+  if (!filtered.length) {
+    container.innerHTML = '<p class="message">No matches found.</p>';
+    countEl.textContent = (displayAll
+      ? `0 matches for "${query}"`
+      : `0 of ${entries.length.toLocaleString()} fetched match${entries.length !== 1 ? 'es' : ''}${fetchedNote}`) + (offline ? ' (offline backup)' : '');
+    return;
+  }
+
+  const shown = filtered.length < entries.length
+    ? `${filtered.length.toLocaleString()} of ${entries.length.toLocaleString()} fetched match${entries.length !== 1 ? 'es' : ''}${fetchedNote}`
+    : (filtered.length < numFound
+        ? `${filtered.length.toLocaleString()} of ${numFound.toLocaleString()} matches shown`
+        : `${filtered.length.toLocaleString()} match${filtered.length !== 1 ? 'es' : ''} for "${query}"`);
+  countEl.textContent = shown + (offline ? ' (offline backup)' : '');
+
+  const frag = document.createDocumentFragment();
+  for (const entry of filtered) {
+    const div = document.createElement('div');
+    div.className = 'jnw-entry';
+
+    const row = document.createElement('div');
+    row.className = 'jnw-term-row';
+    const term = document.createElement('span');
+    term.className = 'jnw-term';
+    term.innerHTML = highlightTokens(entry.term, hlTokensJ) + (entry.toevoeg ? ` (${escapeHTML(entry.toevoeg)})` : '');
+    row.appendChild(term);
+    if (entry.href) {
+      const a = document.createElement('a');
+      a.className = 'jnw-open';
+      a.href = entry.href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'JNW ↗';
+      row.appendChild(a);
+    }
+    div.appendChild(row);
+
+    if (entry.meta) {
+      const meta = document.createElement('div');
+      meta.className = 'jnw-meta';
+      meta.innerHTML = entry.meta;
+      div.appendChild(meta);
+    }
+    if (entry.translation) {
+      const trans = document.createElement('div');
+      trans.className = 'jnw-snippet';
+      trans.innerHTML = highlightTokens(entry.translation, hlTokensJ);
+      div.appendChild(trans);
+    }
+    frag.appendChild(div);
+  }
+  container.innerHTML = '';
+  container.appendChild(frag);
+}
+
+// Filters JNW entries client-side against their headword (trefwoord),
+// since JNW's own matching is broader than a literal headword match and
+// its API doesn't support whole-word/exact-phrase options. Called for
+// every search unless "Display all" is checked (see searchJNW).
+function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
+  const qNorm  = normalizeYiddish(query.toLowerCase()).trim();
+  const WB_PRE  = '(?<![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
+  const WB_POST = '(?![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
+
+  // The baseline (always applied unless "Display all" is checked) requires
+  // the searched words to appear adjacent and in order in the headword —
+  // i.e. the old "Exact phrase" behavior. "Whole word" strengthens that
+  // same adjacent-phrase match by also requiring word boundaries at its
+  // start and end, so it can't be embedded inside a longer word.
+  const re = wholeWord
+    ? new RegExp(WB_PRE + escapeRegex(qNorm) + WB_POST, 'u')
+    : null;
+
+  return entries.filter(e => {
+    const t = normalizeYiddish((e.term || '').toLowerCase());
+    return wholeWord ? re.test(t) : t.includes(qNorm);
+  });
+}
+
+// Parses a response from https://jiddischwoordenboek.nl/api/search, whose
+// shape is: { summary: { numFound, ... }, results: [ { trefwoord,
+// trefwoord_naklik, uitspraak, uitspraak_naklik, vert_zoek, toevoeg, url,
+// ... }, ... ] }
+// Returns { entries, numFound } — entries may be empty (genuinely no
+// matches) — or null if the response wasn't recognized as this API's shape
+// at all (so the caller can fall back to a plain link instead of guessing).
+
+// JNW marks up some text (in `uitspraak`/`uitspraak_naklik`) with [u]...[/u]
+// to mean bold+underline. This converts that into safe HTML (escaping
+// everything else first, so no other tag/markup in the source can sneak
+// through).
+function formatJNWMarkup(s) {
+  const parts = s.split(/(\[u\]|\[\/u\])/);
+  let html = '';
+  let open = false;
+  for (const part of parts) {
+    if (part === '[u]') { html += '<b><u>'; open = true; }
+    else if (part === '[/u]') { html += '</u></b>'; open = false; }
+    else html += escapeHTML(part);
+  }
+  if (open) html += '</u></b>'; // close an unterminated tag defensively
+  return html;
+}
+
+// A JNW field may come back as a plain string or as an array of strings
+// (both shapes have been observed across different fields); this normalizes
+// either into one display string.
+function jnwFieldText(v) {
+  if (Array.isArray(v)) return v.filter(Boolean).join(' ');
+  if (typeof v === 'string') return v.trim();
+  return '';
+}
+
+function parseJNWApiResponse(raw) {
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+  if (!data || !Array.isArray(data.results) || !data.summary) return null;
+
+  const numFound = Number(data.summary.numFound) || 0;
+  const entries = [];
+  for (const r of data.results) {
+    const trefwoordText = jnwFieldText(r.trefwoord) || jnwFieldText(r.title);
+    if (!trefwoordText) continue;
+
+    // trefwoord_naklik (not always present) is displayed as a continuation
+    // of trefwoord, not as a separate field.
+    const trefNaklikText = jnwFieldText(r.trefwoord_naklik);
+    const term = [trefwoordText, trefNaklikText].filter(Boolean).join(' ');
+
+    const toevoeg = Array.isArray(r.toevoeg) ? r.toevoeg.join(', ') : '';
+
+    // uitspraak_naklik (not always present) is displayed as a continuation
+    // of uitspraak, not as a separate field.
+    const uitspraakText = Array.isArray(r.uitspraak) && r.uitspraak.length
+      ? r.uitspraak.map(formatJNWMarkup).join('; ')
+      : '';
+    const naklikText = Array.isArray(r.uitspraak_naklik) && r.uitspraak_naklik.length
+      ? r.uitspraak_naklik.map(formatJNWMarkup).join('; ')
+      : '';
+    const meta = [uitspraakText, naklikText].filter(Boolean).join(' ');
+
+    const translation = Array.isArray(r.vert_zoek) ? r.vert_zoek.join('; ').replace(/\[br\]/g, ' ') : '';
+
+    const href = r.url
+      ? `https://jiddischwoordenboek.nl/api${r.url.startsWith('/') ? '' : '/'}${r.url}`
+      : (r.pid ? `https://jiddischwoordenboek.nl/api/docs/${r.pid}` : null);
+
+    entries.push({ term, toevoeg, meta, translation, href });
+  }
+  return { entries, numFound };
+}
+
+// ── JNW bulk backup (offline snapshot) ──────────────────────────────────────
+// This is a *local backup tool*, separate from the live searchJNW() path
+// above. It crawls the same public search API letter-by-letter (paging with
+// `start`) to assemble a local snapshot in case jiddischwoordenboek.nl ever
+// goes down. It is not wired into search — it only produces a downloadable
+// JSON file.
+const JNW_BASE_LETTERS      = ['א','ב','ג','ד','ה','ו','ז','ח','ט','י','כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת'];
+const JNW_DIACRITIC_LETTERS = ['אַ','אָ','וּ','יִ','פּ','שׂ','תּ'];
+const JNW_CRAWL_LETTERS     = [...JNW_BASE_LETTERS, ...JNW_DIACRITIC_LETTERS];
+const JNW_CRAWL_ROWS        = 500; // rows per page for the backup crawl (live search still uses JNW_ROWS = 200)
+const JNW_CRAWL_DELAY_MS    = 350; // pause between requests to be polite to their server
+
+let jnwCrawlCancelled   = false;
+let jnwCrawlRunning     = false;
+let jnwCrawlPauseResolve = null; // set while waiting on the user between letters
+
+// ── Offline mode (search a locally stored backup instead of the live API) ──
+let jnwBackupMeta   = null;  // { source_name, crawled_date, entry_count } | null
+let jnwOfflineMode  = false; // whether searchJNW() should use the local backup
+
+function jnwOfflineModeActive() {
+  return jnwOfflineMode && Array.isArray(window._jnwBackupEntries) && window._jnwBackupEntries.length > 0;
+}
+
+function updateJNWOfflineUI() {
+  const statusEl = document.getElementById('jnw-offline-status');
+  const toggleEl = document.getElementById('jnw-offline-toggle');
+  const clearBtn = document.getElementById('jnw-clear-backup-btn');
+  const downloadBtn = document.getElementById('jnw-backup-download');
+  const titleEl  = document.getElementById('jnw-col-title');
+  const hasBackup = !!(jnwBackupMeta && Array.isArray(window._jnwBackupEntries) && window._jnwBackupEntries.length);
+
+  if (hasBackup) {
+    statusEl.textContent = `Local backup loaded: ${jnwBackupMeta.entry_count.toLocaleString()} entries` +
+      (jnwBackupMeta.crawled_date ? ` (saved ${jnwBackupMeta.crawled_date})` : '');
+    toggleEl.disabled = false;
+    toggleEl.checked  = jnwOfflineMode;
+    clearBtn.disabled = false;
+  } else {
+    statusEl.textContent = 'No local backup loaded.';
+    toggleEl.disabled = true;
+    toggleEl.checked  = false;
+    clearBtn.disabled = true;
+  }
+  downloadBtn.disabled = !hasBackup;
+
+  titleEl.textContent = jnwOfflineModeActive() ? 'JNW (offline backup)' : 'JNW (jiddischwoordenboek.nl)';
+}
+
+function setJNWOfflineMode(on) {
+  jnwOfflineMode = on;
+  try { localStorage.setItem('jnwOfflineMode', on ? '1' : '0'); } catch (e) {}
+  updateJNWOfflineUI();
+}
+
+async function handleJNWBackupFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = '';
+  let data;
+  try {
+    data = JSON.parse(await file.text());
+  } catch (e) {
+    alert('Could not read that file as JSON: ' + e.message);
+    return;
+  }
+  if (!data || !Array.isArray(data.entries) || !data.entries.length) {
+    alert('That file doesn\'t look like a JNW backup (expected an "entries" array).');
+    return;
+  }
+  jnwBackupMeta = {
+    source_name:  data.source_name  || 'jiddischwoordenboek.nl (JNW)',
+    crawled_date: data.crawled_date || '',
+    entry_count:  data.entries.length
+  };
+  window._jnwBackupEntries = data.entries;
+  await saveJNWBackupToDB(jnwBackupMeta, data.entries);
+  updateJNWOfflineUI();
+}
+
+async function clearJNWBackup() {
+  window._jnwBackupEntries = [];
+  jnwBackupMeta = null;
+  await clearJNWBackupFromDB();
+  setJNWOfflineMode(false); // also updates the UI
+}
+
+// Broad substring match across term/toevoeg/translation, mirroring how
+// JNW's own live API returns a broader-than-headword candidate set before
+// filterJNWEntriesByTerm narrows it down. Needed because, unlike the live
+// API, a local backup search starts from literally every entry.
+function searchJNWLocalBackup(query) {
+  const qNorm = normalizeYiddish(query.toLowerCase()).trim();
+  const all = window._jnwBackupEntries || [];
+  const entries = all.filter(e => {
+    const hay = normalizeYiddish(`${e.term || ''} ${e.toevoeg || ''} ${e.translation || ''}`.toLowerCase());
+    return hay.includes(qNorm);
+  });
+  return { entries, numFound: entries.length };
+}
+
+function openSettings() {
+  document.getElementById('settings-overlay').classList.add('open');
+  refreshStatus();
+  updateJNWOfflineUI();
+}
+function closeSettings() {
+  if (jnwCrawlRunning) jnwCrawlStop(); // don't leave a paused/running crawl unseen
+  document.getElementById('settings-overlay').classList.remove('open');
+}
+function cancelJNWBackup() {
+  jnwCrawlStop();
+}
+// Called from the "Continue to Next Letter" / "Stop Here" pause buttons.
+function jnwCrawlContinue() {
+  if (jnwCrawlPauseResolve) { const r = jnwCrawlPauseResolve; jnwCrawlPauseResolve = null; r(true); }
+}
+function jnwCrawlStop() {
+  jnwCrawlCancelled = true;
+  if (jnwCrawlPauseResolve) { const r = jnwCrawlPauseResolve; jnwCrawlPauseResolve = null; r(false); }
+}
+function waitForUserToContinue() {
+  document.getElementById('jnw-backup-pause-btns').style.display = 'flex';
+  return new Promise(resolve => { jnwCrawlPauseResolve = resolve; });
+}
+
+// Crawls one query term (a letter + '*') to exhaustion, paging with `start`,
+// merging results into the given Map (dedupe key: href, else
+// term|toevoeg|translation). Shared by the full multi-letter crawl and the
+// single-letter tool below. Returns { gotThisLetter, addedThisLetter, numFound }.
+async function crawlOneLetterIntoMap(letter, seenMap, logEl, progressEl, labelIndex, labelTotal) {
+  const queryTerm = letter + '*';
+  let start = 0, numFound = null, gotThisLetter = 0, addedThisLetter = 0;
+
+  while (true) {
+    if (jnwCrawlCancelled) break;
+    progressEl.textContent =
+      (labelIndex != null ? `Letter ${labelIndex}/${labelTotal} ` : '') +
+      `"${queryTerm}" — start=${start}${numFound !== null ? ` of ${numFound}` : ''} — ` +
+      `${seenMap.size.toLocaleString()} unique entries so far`;
+
+    let raw;
+    try {
+      // Cache-bust: several free CORS proxies cache responses, sometimes
+      // loosely enough that different `start` values can come back
+      // identical. Appending a unique, harmless param forces a fresh
+      // request each time without affecting how JNW's own API parses it.
+      const bustedUrl = jnwApiUrl(queryTerm, start, JNW_CRAWL_ROWS) + `&_cb=${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+      raw = await fetchWithCorsFallback(bustedUrl);
+    } catch (err) {
+      logEl.textContent += `⚠ "${queryTerm}" @ start=${start}: ${err.message}\n`;
+      logEl.scrollTop = logEl.scrollHeight;
+      break; // give up on this letter, move to the next one
+    }
+
+    let parsed;
+    try { parsed = parseJNWApiResponse(raw); } catch (e) { parsed = null; }
+    if (!parsed) {
+      logEl.textContent += `⚠ "${queryTerm}" @ start=${start}: couldn't parse response\n`;
+      logEl.scrollTop = logEl.scrollHeight;
+      break;
+    }
+
+    // Diagnostic fingerprint: first and last returned term, plus which
+    // proxy channel served this page. If these repeat identically across
+    // different `start` values, the requests are being served from a cache
+    // (proxy-side) rather than genuinely re-querying JNW.
+    const firstTerm = parsed.entries[0]?.term || '(none)';
+    const lastTerm  = parsed.entries[parsed.entries.length - 1]?.term || '(none)';
+    logEl.textContent += `  (via ${fetchWithCorsFallback.lastVia || '?'}) start=${start}: first="${firstTerm}" last="${lastTerm}"\n`;
+    logEl.scrollTop = logEl.scrollHeight;
+
+    numFound = parsed.numFound;
+    let addedThisPage = 0;
+    for (const e of parsed.entries) {
+      // Include toevoeg (the field that seems to carry homograph/sense
+      // distinctions) so two different entries that happen to share the
+      // same headword + translation don't collapse into one.
+      const key = e.href || `${e.term}|${e.toevoeg}|${e.translation}`;
+      if (!seenMap.has(key)) { seenMap.set(key, e); addedThisPage++; }
+    }
+    gotThisLetter += parsed.entries.length;
+    addedThisLetter += addedThisPage;
+
+    // If a page returns far fewer *new* entries than it returned *raw*
+    // results, that page was mostly re-serving documents we already have —
+    // a sign of unstable pagination on the server side rather than a
+    // dedup problem here. Surface it instead of hiding it.
+    if (parsed.entries.length > 0 && addedThisPage < parsed.entries.length * 0.5) {
+      logEl.textContent += `  ↳ note: page at start=${start} returned ${parsed.entries.length} results but only ${addedThisPage} were new (possible unstable pagination)\n`;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    // Advance by however many entries the server actually returned, not by
+    // the rows we requested — the server appears to cap the real page size
+    // well below what we ask for, and stepping by the requested amount
+    // silently skips everything in between.
+    const pageSize = parsed.entries.length;
+    const reachedEnd = pageSize === 0 || gotThisLetter >= numFound;
+    if (reachedEnd) break;
+    start += pageSize;
+    await new Promise(r => setTimeout(r, JNW_CRAWL_DELAY_MS));
+  }
+
+  logEl.textContent += `"${queryTerm}": ${gotThisLetter.toLocaleString()} raw results, ${addedThisLetter.toLocaleString()} new unique (numFound=${numFound ?? '?'})\n`;
+  logEl.scrollTop = logEl.scrollHeight;
+
+  return { gotThisLetter, addedThisLetter, numFound };
+}
+
+async function startJNWBackup() {
+  if (jnwCrawlRunning) return;
+  jnwCrawlRunning   = true;
+  jnwCrawlCancelled = false;
+
+  const progressEl = document.getElementById('jnw-backup-progress');
+  const logEl      = document.getElementById('jnw-backup-log');
+  const startBtn    = document.getElementById('jnw-backup-start');
+  const cancelBtn   = document.getElementById('jnw-backup-cancel');
+  const downloadBtn = document.getElementById('jnw-backup-download');
+  const singleBtn   = document.getElementById('jnw-single-letter-btn');
+
+  logEl.textContent = '';
+  startBtn.disabled    = true;
+  cancelBtn.disabled   = false;
+  downloadBtn.disabled = true;
+  singleBtn.disabled   = true;
+
+  const seen = new Map(); // dedupe key -> entry
+
+  for (let i = 0; i < JNW_CRAWL_LETTERS.length; i++) {
+    if (jnwCrawlCancelled) break;
+    const letter = JNW_CRAWL_LETTERS[i];
+
+    await crawlOneLetterIntoMap(letter, seen, logEl, progressEl, i + 1, JNW_CRAWL_LETTERS.length);
+
+    const isLastLetter = i === JNW_CRAWL_LETTERS.length - 1;
+    if (jnwCrawlCancelled || isLastLetter) continue;
+
+    progressEl.textContent =
+      `Paused after "${letter}*" (${i + 1}/${JNW_CRAWL_LETTERS.length}) — ` +
+      `${seen.size.toLocaleString()} unique entries so far. Continue to "${JNW_CRAWL_LETTERS[i + 1]}*"?`;
+    const shouldContinue = await waitForUserToContinue();
+    document.getElementById('jnw-backup-pause-btns').style.display = 'none';
+    if (!shouldContinue) break;
+  }
+
+  document.getElementById('jnw-backup-pause-btns').style.display = 'none';
+  window._jnwBackupEntries = Array.from(seen.values());
+  progressEl.textContent = jnwCrawlCancelled
+    ? `Cancelled — ${seen.size.toLocaleString()} unique entries collected so far.`
+    : `Done — ${seen.size.toLocaleString()} unique entries collected.`;
+
+  if (window._jnwBackupEntries.length) {
+    jnwBackupMeta = {
+      source_name:  'jiddischwoordenboek.nl (JNW)',
+      crawled_date: new Date().toISOString().slice(0, 10),
+      entry_count:  window._jnwBackupEntries.length
+    };
+    await saveJNWBackupToDB(jnwBackupMeta, window._jnwBackupEntries);
+  }
+  updateJNWOfflineUI();
+
+  startBtn.disabled    = false;
+  cancelBtn.disabled   = true;
+  singleBtn.disabled   = false;
+  jnwCrawlRunning = false;
+}
+
+// Crawls just one letter/diacritic (for testing, or to top up an existing
+// backup incrementally). Merges into whatever backup is already loaded
+// rather than starting over, unlike the full multi-letter crawl above.
+async function startJNWSingleLetterCrawl() {
+  if (jnwCrawlRunning) return;
+  const letter = document.getElementById('jnw-single-letter-select').value;
+  if (!letter) return;
+
+  jnwCrawlRunning   = true;
+  jnwCrawlCancelled = false;
+
+  const progressEl = document.getElementById('jnw-backup-progress');
+  const logEl      = document.getElementById('jnw-backup-log');
+  const startBtn    = document.getElementById('jnw-backup-start');
+  const cancelBtn   = document.getElementById('jnw-backup-cancel');
+  const singleBtn   = document.getElementById('jnw-single-letter-btn');
+
+  startBtn.disabled  = true;
+  cancelBtn.disabled = false;
+  singleBtn.disabled = true;
+
+  logEl.textContent += `— Testing "${letter}*" only —\n`;
+  logEl.scrollTop = logEl.scrollHeight;
+
+  // Seed the dedupe map from whatever backup already exists, so this adds
+  // to it rather than replacing it.
+  const seen = new Map();
+  for (const e of (window._jnwBackupEntries || [])) {
+    const key = e.href || `${e.term}|${e.toevoeg}|${e.translation}`;
+    seen.set(key, e);
+  }
+  const before = seen.size;
+
+  await crawlOneLetterIntoMap(letter, seen, logEl, progressEl, null, null);
+
+  window._jnwBackupEntries = Array.from(seen.values());
+  jnwBackupMeta = {
+    source_name:  jnwBackupMeta?.source_name  || 'jiddischwoordenboek.nl (JNW)',
+    crawled_date: new Date().toISOString().slice(0, 10),
+    entry_count:  window._jnwBackupEntries.length
+  };
+  await saveJNWBackupToDB(jnwBackupMeta, window._jnwBackupEntries);
+  updateJNWOfflineUI();
+
+  progressEl.textContent = jnwCrawlCancelled
+    ? `Stopped — added ${(seen.size - before).toLocaleString()} new entries so far (${seen.size.toLocaleString()} total in backup).`
+    : `Done testing "${letter}*" — added ${(seen.size - before).toLocaleString()} new entries (${seen.size.toLocaleString()} total in backup).`;
+
+  startBtn.disabled  = false;
+  cancelBtn.disabled = true;
+  singleBtn.disabled = false;
+  jnwCrawlRunning = false;
+}
+
+function downloadJNWBackup() {
+  const entries = window._jnwBackupEntries || [];
+  if (!entries.length) return;
+  const dateStr = jnwBackupMeta?.crawled_date || new Date().toISOString().slice(0, 10);
+  const payload = {
+    source_name: jnwBackupMeta?.source_name || 'jiddischwoordenboek.nl (JNW)',
+    crawled_date: dateStr,
+    entry_count: entries.length,
+    entries
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url;
+  a.download = `jnw_backup_${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function downloadYCDBackup() {
+  const entries = appData.entries || [];
+  if (!entries.length) return;
+  const dateStr = appData.download_date || new Date().toISOString().slice(0, 10);
+  const payload = {
+    source_name:   appData.source_name || 'yiddishculturaldictionary.org (YCD)',
+    download_date: dateStr,
+    entry_count:   entries.length,
+    entries
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url;
+  a.download = `ycd_backup_${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// ── Status bar ────────────────────────────────────────────────────────────────
+function refreshStatus() {
+  const el     = document.getElementById('ycd-status');
+  const n      = appData.entries.length;
+  const name   = appData.source_name || '--';
+  const dl     = appData.download_date;
+  if (n) {
+    el.textContent = `Loaded: ${name}  |  ${n.toLocaleString()} entries` +
+                     (dl ? `  |  Downloaded: ${dl}` : '');
+  } else {
+    el.textContent = 'No dictionary loaded.';
+  }
+  document.getElementById('ycd-backup-download').disabled = !n;
+}
+
+// ── File import ───────────────────────────────────────────────────────────────
+function importFile() {
+  document.getElementById('file-input').click();
+}
+
+function handleFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  closeSettings();
+  const reader = new FileReader();
+  reader.onload = e => {
+    finishImport(e.target.result, file.name, '');
+  };
+  reader.readAsText(file, 'utf-8');
+  input.value = '';
+}
+
+async function finishImport(html, sourceName, downloadDate) {
+  const entries = parseHTML(html);
+  if (!entries.length) {
+    alert('No entries found. Make sure the file has a <main> tag and entries separated by blank paragraphs.');
+    return;
+  }
+  // Explicitly free old data from memory and storage before loading new data,
+  // so we don't briefly hold both old and new entries in memory at once.
+  appData        = { source_name: null, download_date: '', entries: [] };
+  currentMatches = [];
+  findMatches    = [];
+  try {
+    const db = await openDB();
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    tx.objectStore(IDB_STORE).clear();
+    await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; });
+    db.close();
+  } catch(e) {}
+
+  // Now load the new data
+  appData = { source_name: sourceName, download_date: downloadDate, entries };
+  await saveData();
+  refreshStatus();
+  document.getElementById('results-ycd').innerHTML = '<p class="message">Dictionary loaded. Type a word and tap Search.</p>';
+  document.getElementById('count-ycd').textContent = '';
+  alert(`Imported ${entries.length.toLocaleString()} entries from ${sourceName}`);
+}
+
+// ── Web import ────────────────────────────────────────────────────────────────
+
+async function startWebImport() {
+  const url = document.getElementById('url-input').value.trim();
+  if (!url) return;
+  const progress = document.getElementById('modal-progress');
+  progress.innerHTML = '<span class="spinner"></span> Downloading…';
+
+  try {
+    // Use a CORS proxy since the iPhone can't do cross-origin requests directly
+    // Try direct fetch first; fall back to proxy.
+    let html;
+    try {
+      const resp = await fetch(url, { headers: { 'Accept': 'text/html' } });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      html = await resp.text();
+    } catch (corsErr) {
+      // Try allorigins CORS proxy
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+      const resp2 = await fetch(proxyUrl);
+      if (!resp2.ok) throw new Error(`Proxy HTTP ${resp2.status}`);
+      const data2 = await resp2.json();
+      html = data2.contents;
+    }
+
+    const today = new Date().toISOString().slice(0, 10);
+    closeSettings();
+    finishImport(html, url, today);
+
+    // Also offer to save as file on supported browsers
+    if (window.showSaveFilePicker) {
+      try {
+        const fh = await window.showSaveFilePicker({
+          suggestedName: `downloaded_dictionary_${today}.html`,
+          types: [{ description: 'HTML file', accept: { 'text/html': ['.html'] } }],
+        });
+        const writable = await fh.createWritable();
+        await writable.write(html);
+        await writable.close();
+      } catch(e) { /* user cancelled save dialog -- fine */ }
+    }
+  } catch(err) {
+    progress.textContent = `Error: ${err.message}`;
+  }
+}
+
+// ── Clear ─────────────────────────────────────────────────────────────────────
+async function clearDictionary() {
+  if (!appData.entries.length) { alert('No dictionary is currently loaded.'); return; }
+  if (!confirm('Remove the stored dictionary so you can import a new one?')) return;
+
+  // Clear all in-memory references so the JS engine can garbage-collect
+  // the entry objects immediately.
+  appData        = { source_name: null, download_date: '', entries: [] };
+  currentMatches = [];
+  findMatches    = [];
+
+  // Await the async save so IndexedDB is fully cleared before we return.
+  // We also explicitly clear the IndexedDB store (not just overwrite with
+  // empty arrays) to ensure the storage is fully released.
+  try {
+    const db = await openDB();
+    const tx = db.transaction(IDB_STORE, 'readwrite');
+    tx.objectStore(IDB_STORE).clear();
+    await new Promise((res, rej) => { tx.oncomplete = res; tx.onerror = rej; });
+    db.close();
+  } catch(e) {
+    // Fallback: write empty data
+    await saveData();
+  }
+  // Also clear localStorage fallback
+  try { localStorage.removeItem('dict_backup'); } catch(_) {}
+
+  refreshStatus();
+  document.getElementById('results-ycd').innerHTML = '<p class="message">Dictionary cleared.</p>';
+  document.getElementById('count-ycd').textContent = '';
+  document.getElementById('search-input').value = '';
+}
+
+// ── Find in results ───────────────────────────────────────────────────────────
+function toggleFind() {
+  const bar = document.getElementById('findbar');
+  if (bar.classList.contains('open')) {
+    closeFind();
+  } else {
+    bar.classList.add('open');
+    document.getElementById('find-input').focus();
+  }
+}
+
+function closeFind(silent) {
+  document.getElementById('findbar').classList.remove('open');
+  document.getElementById('find-input').value = '';
+  document.getElementById('find-count').textContent = '';
+  clearFindHighlights();
+  findMatches = [];
+  findIndex   = -1;
+}
+
+function findReset() {
+  clearFindHighlights();
+  findMatches = [];
+  findIndex   = -1;
+  document.getElementById('find-count').textContent = '';
+  const q = document.getElementById('find-input').value.trim();
+  if (!q) return;
+  buildFindMatches(q);
+  if (findMatches.length) { findIndex = 0; scrollToFind(); }
+  updateFindCount();
+}
+
+function findNext() {
+  if (!findMatches.length) { findReset(); return; }
+  findIndex = (findIndex + 1) % findMatches.length;
+  scrollToFind();
+  updateFindCount();
+}
+
+function findPrev() {
+  if (!findMatches.length) { findReset(); return; }
+  findIndex = (findIndex - 1 + findMatches.length) % findMatches.length;
+  scrollToFind();
+  updateFindCount();
+}
+
+function updateFindCount() {
+  const el = document.getElementById('find-count');
+  el.textContent = findMatches.length
+    ? `${findIndex + 1} of ${findMatches.length}`
+    : 'No matches';
+}
+
+// Find works by wrapping text nodes in <span class="find-hl"> elements
+function buildFindMatches(query) {
+  const container = document.getElementById('results-columns');
+  const q = query.toLowerCase();
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  const hits = [];
+  let node;
+  while ((node = walker.nextNode())) {
+    const text  = node.textContent;
+    const lower = text.toLowerCase();
+    let pos = 0;
+    while (true) {
+      const idx = lower.indexOf(q, pos);
+      if (idx === -1) break;
+      hits.push({ node, start: idx, end: idx + q.length });
+      pos = idx + q.length;
+    }
+  }
+
+  // Wrap hits in spans (process in reverse to preserve offsets)
+  const spans = [];
+  for (let i = hits.length - 1; i >= 0; i--) {
+    const { node, start, end } = hits[i];
+    const range = document.createRange();
+    range.setStart(node, start);
+    range.setEnd(node, end);
+    const span = document.createElement('span');
+    span.className = 'find-hl';
+    span.style.background = '#FFE082';
+    span.style.borderRadius = '2px';
+    range.surroundContents(span);
+    spans.unshift(span);
+  }
+  findMatches = spans;
+}
+
+function clearFindHighlights() {
+  document.querySelectorAll('.find-hl').forEach(span => {
+    span.replaceWith(document.createTextNode(span.textContent));
+  });
+  // Merge adjacent text nodes
+  document.getElementById('results-columns').normalize();
+}
+
+function scrollToFind() {
+  document.querySelectorAll('.find-hl').forEach((s, i) => {
+    s.style.background = i === findIndex ? '#FF9800' : '#FFE082';
+  });
+  if (findMatches[findIndex]) {
+    findMatches[findIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// ── Enter key on search ───────────────────────────────────────────────────────
+document.getElementById('search-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doSearch();
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+// Restore the last-used dictionary scope (if any) and show/hide columns
+// accordingly, without triggering a search on load.
+(() => {
+  try {
+    const savedScope = localStorage.getItem('dictScope');
+    if (savedScope === 'ycd' || savedScope === 'jnw' || savedScope === 'both') {
+      document.getElementById('dict-scope').value = savedScope;
+      document.getElementById('col-ycd').classList.toggle('hidden-col', savedScope === 'jnw');
+      document.getElementById('col-jnw').classList.toggle('hidden-col', savedScope === 'ycd');
+    }
+  } catch (e) {}
+})();
+
+// loadData is now async (IndexedDB), so we await it before refreshing the UI.
+(async () => {
+  const loaded = await loadData();
+  refreshStatus();
+  if (appData.entries.length) {
+    document.getElementById('count-ycd').textContent =
+      `${appData.entries.length.toLocaleString()} entries loaded`;
+  }
+  if (!loaded) {
+    document.getElementById('results-ycd').innerHTML =
+      '<p class="message">Type a word and tap Search.</p>';
+  }
+  document.getElementById('results-jnw').innerHTML =
+    '<p class="message">Type a word and tap Search.</p>';
+
+  // Restore a previously saved JNW local backup (if any) and the user's
+  // last offline-mode preference, so both persist across app launches.
+  const jnwBackup = await loadJNWBackupFromDB();
+  if (jnwBackup) {
+    jnwBackupMeta = jnwBackup.meta;
+    window._jnwBackupEntries = jnwBackup.entries;
+  }
+  try { jnwOfflineMode = localStorage.getItem('jnwOfflineMode') === '1'; } catch (e) {}
+  updateJNWOfflineUI();
+
+  // Populate the single-letter test/crawl dropdown.
+  const singleSelect = document.getElementById('jnw-single-letter-select');
+  singleSelect.innerHTML = JNW_CRAWL_LETTERS
+    .map(l => `<option value="${l}">${l}*</option>`)
+    .join('');
+})();
+</script>
+</body>
+</html>

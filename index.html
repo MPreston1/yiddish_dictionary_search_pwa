@@ -1105,6 +1105,22 @@ function formatJNWMarkup(s) {
 // A JNW field may come back as a plain string or as an array of strings
 // (both shapes have been observed across different fields); this normalizes
 // either into one display string.
+// JNW's own top-level `kenmerk` field isn't present on search-result hits;
+// it's only found embedded inside the `xml` field, a string containing the
+// full raw <artikel>...<trefregel><kenmerk>...</kenmerk>...</trefregel>
+// XML for that entry. DOMParser handles entity-decoding/escaping correctly,
+// which a regex wouldn't reliably do.
+function extractKenmerkFromXml(xmlStr) {
+  if (!xmlStr || typeof xmlStr !== 'string') return '';
+  try {
+    const doc = new DOMParser().parseFromString(xmlStr, 'text/xml');
+    if (doc.querySelector('parsererror')) return '';
+    return doc.querySelector('kenmerk')?.textContent?.trim() || '';
+  } catch (e) {
+    return '';
+  }
+}
+
 function jnwFieldText(v) {
   if (Array.isArray(v)) return v.filter(Boolean).join(' ');
   if (typeof v === 'string') return v.trim();
@@ -1134,9 +1150,9 @@ function parseJNWApiResponse(raw) {
     const toevoeg = Array.isArray(r.toevoeg) ? r.toevoeg.join(', ') : '';
 
     // kenmerk (not always present) — a short grammatical/usage tag JNW
-    // attaches to some entries. May come back as a string or array, like
-    // other JNW fields, so it's normalized the same way.
-    const kenmerk = jnwFieldText(r.kenmerk);
+    // attaches to some entries. Not a top-level field on search hits; it's
+    // embedded inside the `xml` field, so it's pulled out from there.
+    const kenmerk = extractKenmerkFromXml(r.xml);
 
     // uitspraak_naklik (not always present) is displayed as a continuation
     // of uitspraak, not as a separate field.

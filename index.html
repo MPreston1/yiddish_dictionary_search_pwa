@@ -80,6 +80,7 @@
   .jnw-open { font-size: 11px; color: var(--muted); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
   .jnw-snippet { font-size: 13px; color: var(--text); line-height: 1.5; }
   .jnw-meta { font-size: 12px; color: var(--muted); direction: ltr; unicode-bidi: embed; margin-bottom: 2px; }
+  .jnw-kenmerk { font-size: 12px; font-style: italic; color: var(--muted); margin-bottom: 2px; }
   .jnw-fallback { font-size: 12px; color: var(--muted); padding: 8px 2px; line-height: 1.5; }
   .jnw-fallback a { color: var(--accent); }
 
@@ -1034,6 +1035,12 @@ async function searchJNW(query, opts = {}) {
       meta.innerHTML = entry.meta;
       div.appendChild(meta);
     }
+    if (entry.kenmerk) {
+      const kenmerk = document.createElement('div');
+      kenmerk.className = 'jnw-kenmerk';
+      kenmerk.textContent = `character: ${entry.kenmerk}`;
+      div.appendChild(kenmerk);
+    }
     if (entry.translation) {
       const trans = document.createElement('div');
       trans.className = 'jnw-snippet';
@@ -1072,8 +1079,8 @@ function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
 
 // Parses a response from https://jiddischwoordenboek.nl/api/search, whose
 // shape is: { summary: { numFound, ... }, results: [ { trefwoord,
-// trefwoord_naklik, uitspraak, uitspraak_naklik, vert_zoek, toevoeg, url,
-// ... }, ... ] }
+// trefwoord_naklik, uitspraak, uitspraak_naklik, vert_zoek, toevoeg,
+// kenmerk, url, ... }, ... ] }
 // Returns { entries, numFound } — entries may be empty (genuinely no
 // matches) — or null if the response wasn't recognized as this API's shape
 // at all (so the caller can fall back to a plain link instead of guessing).
@@ -1126,6 +1133,11 @@ function parseJNWApiResponse(raw) {
 
     const toevoeg = Array.isArray(r.toevoeg) ? r.toevoeg.join(', ') : '';
 
+    // kenmerk (not always present) — a short grammatical/usage tag JNW
+    // attaches to some entries. May come back as a string or array, like
+    // other JNW fields, so it's normalized the same way.
+    const kenmerk = jnwFieldText(r.kenmerk);
+
     // uitspraak_naklik (not always present) is displayed as a continuation
     // of uitspraak, not as a separate field.
     const uitspraakText = Array.isArray(r.uitspraak) && r.uitspraak.length
@@ -1142,7 +1154,7 @@ function parseJNWApiResponse(raw) {
       ? `https://jiddischwoordenboek.nl/api${r.url.startsWith('/') ? '' : '/'}${r.url}`
       : (r.pid ? `https://jiddischwoordenboek.nl/api/docs/${r.pid}` : null);
 
-    entries.push({ term, toevoeg, meta, translation, href });
+    entries.push({ term, toevoeg, kenmerk, meta, translation, href });
   }
   return { entries, numFound };
 }

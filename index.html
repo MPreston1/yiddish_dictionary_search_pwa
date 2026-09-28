@@ -273,6 +273,8 @@
 //   U+05D5 + U+05BC (Vov + dagesh, "vov melupm")        -> U+05D5
 //   U+05EA + U+05BC (Tav + dagesh)                       -> U+05EA
 //   U+05DB + U+05BC (Kof, "khof" + dagesh)               -> U+05DB
+//   U+05D9 + U+05B4 (Yod + hiriq, "yud khirik")          -> U+05D9
+//   U+FB1D (Yod-with-hiriq precomposed ligature)          -> U+05D9
 // FB1F is fully expanded (rather than left as U+05F2 + U+05B7) because text
 // sourced from different places encodes "pasekh tsvey yudn" inconsistently:
 // some as the single precomposed U+FB1F character, some as a separate
@@ -287,6 +289,13 @@
 // dagesh (U+05BC, "פּ") is intentionally left untouched, because YCD
 // included the dagesh. Kof + dagesh (U+05BC, "כּ"), by contrast, is
 // folded down to plain kof (כ) because YCD does not include the dagesh.
+// Yod + hiriq (U+05B4, "יִ") is likewise folded down to plain yod (י), so
+// that a search containing the pointed form also catches entries spelled
+// with a bare yod (and vice versa, since the query and the entry text are
+// both normalized). As with FB1F above, this letter can be encoded two
+// ways depending on the source: as the single precomposed character U+FB1D,
+// or as a plain yod followed by a separate combining hiriq (what a keyboard
+// typically produces). Both are handled so they reduce to the same plain yod.
 function normalizeYiddishWithMap(text) {
   let normalized = '';
   const chunks = []; // { normStart, normEnd, origStart, origEnd }
@@ -303,6 +312,8 @@ function normalizeYiddishWithMap(text) {
     else if (c === '\u05E4' && c2 === '\u05BF') { out = '\u05E4';       consumed = 2; }
     else if (c === '\u05D5' && c2 === '\u05BC') { out = '\u05D5';       consumed = 2; }
     else if (c === '\u05EA' && c2 === '\u05BC') { out = '\u05EA';       consumed = 2; }
+    else if (c === '\uFB1D')                    { out = '\u05D9';       consumed = 1; }
+    else if (c === '\u05D9' && c2 === '\u05B4') { out = '\u05D9';       consumed = 2; }
     else if (c === '\u05DB' && c2 === '\u05BC') { out = '\u05DB';       consumed = 2; }
     else                                         { out = c;              consumed = 1; }
 

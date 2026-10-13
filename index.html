@@ -1072,7 +1072,13 @@ async function searchJNW(query, opts = {}) {
 // its API doesn't support whole-word/exact-phrase options. Called for
 // every search unless "Display all" is checked (see searchJNW).
 function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
-  const qNorm  = normalizeYiddish(query.toLowerCase()).trim();
+  // Strip bidi control marks (e.g. U+200F RLM, which JNW embeds in some
+  // trefwoord_naklik values) and collapse the resulting whitespace runs
+  // down to single spaces, so a plain-typed query matches an entry whose
+  // multi-part term has one of these invisible marks sitting between words.
+  const clean = s => s.replace(/[\u200e\u200f]/g, '').replace(/\s+/g, ' ').trim();
+
+  const qNorm = clean(normalizeYiddish(query.toLowerCase()));
   const WB_PRE  = '(?<![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
   const WB_POST = '(?![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
 
@@ -1086,7 +1092,7 @@ function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
     : null;
 
   return entries.filter(e => {
-    const t = normalizeYiddish((e.term || '').toLowerCase());
+    const t = clean(normalizeYiddish((e.term || '').toLowerCase()));
     return wholeWord ? re.test(t) : t.includes(qNorm);
   });
 }

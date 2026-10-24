@@ -46,6 +46,9 @@
   #search-input { flex: 1; min-width: 120px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 15px; background: var(--card); color: var(--text); outline: none; -webkit-appearance: none; }
   #search-input:focus { border-color: var(--accent); }
   #search-btn { flex-shrink: 0; }
+  #yid-toggle { flex-shrink: 0; min-width: 38px; padding: 7px 10px; font-size: 16px; line-height: 1.1; }
+  #yid-toggle.on { background: var(--accent); }
+  #search-input.yid-on, #find-input.yid-on { border-color: var(--accent); }
   #options-row { display: flex; gap: 12px; align-items: center; padding: 4px 12px 6px; background: var(--bg); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
   label { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
   select { font-size: 12px; border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px; background: var(--card); color: var(--text); -webkit-appearance: none; appearance: none; padding-right: 18px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236E6E73'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 5px center; }
@@ -140,7 +143,8 @@
 
   <!-- Search bar -->
   <div id="searchbar">
-    <input id="search-input" type="search" placeholder="Search…" autocorrect="off" autocapitalize="none" spellcheck="false">
+    <button type="button" class="btn btn-grey" id="yid-toggle" title="Toggle Yiddish typing (or type ~)" aria-pressed="false" aria-label="Toggle Yiddish typing">A</button>
+    <input id="search-input" type="search" dir="auto" placeholder="Search…" autocorrect="off" autocapitalize="none" spellcheck="false">
     <button class="btn btn-blue search-btn" id="search-btn" onclick="doSearch()">Search</button>
   </div>
   <div id="options-row">
@@ -1809,6 +1813,118 @@ function scrollToFind() {
 document.getElementById('search-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') doSearch();
 });
+
+// ── Yiddish typing mode (Yiddish Klal layout) ─────────────────────────────────
+// Maps physical keys (event.code) to the Yiddish Klal Mac layout:
+// [plain, shift, option, shift+option]. Keys not listed here type normally.
+const YK_MAP = {
+  KeyA: ['אַ', 'א'],
+  KeyS: ['ס', 'ת'],
+  KeyD: ['ד', 'דזש'],
+  KeyF: ['פֿ', 'ף'],
+  KeyG: ['ג', 'דזש'],
+  KeyH: ['ה', 'ח'],
+  KeyJ: ['ײ', 'דזש'],
+  KeyK: ['ק', 'כּ'],
+  KeyL: ['ל', 'ל'],
+  KeyQ: ['ק', 'כּ'],
+  KeyW: ['ש', 'שׂ'],
+  KeyE: ['ע', 'ײ'],
+  KeyR: ['ר', 'טש'],
+  KeyT: ['ט', 'תּ', 'תֿ'],
+  KeyY: ['ײַ', 'ױ'],
+  KeyU: ['ו', 'וּ'],
+  KeyI: ['י', 'יִ'],
+  KeyO: ['אָ', 'ױ'],
+  KeyP: ['פּ', 'פ'],
+  KeyZ: ['ז', 'זש'],
+  KeyX: ['כ', 'ך', 'כֿ'],
+  KeyC: ['צ', 'ץ'],
+  KeyV: ['װ', 'בֿ'],
+  KeyB: ['ב', 'בּ'],
+  KeyN: ['נ', 'ן'],
+  KeyM: ['מ', 'ם'],
+  Minus:        ['־', '-', '–', '—'],
+  Equal:        ['=', '+', '⸗'],
+  BracketLeft:  ['[', '„', '{', '’'],
+  BracketRight: [']', '“', '}', '”'],
+  Backslash:    ['\\', '|', '׳', '״'],
+  Quote:        ["'", '"', '′', '″'],
+  Semicolon:    [';', ':', '…']
+};
+
+let yiddishOn = false;
+try { yiddishOn = localStorage.getItem('yiddishTyping') === '1'; } catch (e) {}
+let yidLastWasTilde = false;
+
+function updateYiddishUI() {
+  const btn = document.getElementById('yid-toggle');
+  btn.textContent = yiddishOn ? 'א' : 'A';
+  btn.classList.toggle('on', yiddishOn);
+  btn.setAttribute('aria-pressed', yiddishOn ? 'true' : 'false');
+  ['search-input', 'find-input'].forEach(id =>
+    document.getElementById(id).classList.toggle('yid-on', yiddishOn));
+}
+
+function setYiddish(on) {
+  yiddishOn = on;
+  try { localStorage.setItem('yiddishTyping', on ? '1' : '0'); } catch (e) {}
+  updateYiddishUI();
+}
+
+function insertAtCursor(el, text) {
+  let ok = false;
+  try { ok = document.execCommand('insertText', false, text); } catch (e) {}
+  if (!ok) {
+    const start = el.selectionStart == null ? el.value.length : el.selectionStart;
+    const end = el.selectionEnd == null ? start : el.selectionEnd;
+    el.setRangeText(text, start, end, 'end');
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+}
+
+function yiddishKeydown(e) {
+  if (e.isComposing || e.ctrlKey || e.metaKey) return;
+
+  // "~" toggles the mode; "~~" types a literal "~" and leaves the mode unchanged.
+  if (e.key === '~') {
+    e.preventDefault();
+    if (e.repeat) return;
+    if (yidLastWasTilde) {
+      yidLastWasTilde = false;
+      setYiddish(!yiddishOn);
+      insertAtCursor(e.target, '~');
+    } else {
+      yidLastWasTilde = true;
+      setYiddish(!yiddishOn);
+    }
+    return;
+  }
+
+  if (['Shift', 'Alt', 'Control', 'Meta', 'CapsLock'].includes(e.key)) return;
+  yidLastWasTilde = false;
+
+  // Caps Lock types plain Latin, as in the Mac layout.
+  if (!yiddishOn || e.getModifierState('CapsLock')) return;
+
+  const m = YK_MAP[e.code];
+  if (!m) return;
+  const out = e.altKey ? (e.shiftKey ? m[3] : m[2]) : (e.shiftKey ? m[1] : m[0]);
+  if (!out) return;
+  e.preventDefault();
+  insertAtCursor(e.target, out);
+}
+
+['search-input', 'find-input'].forEach(id =>
+  document.getElementById(id).addEventListener('keydown', yiddishKeydown));
+
+const yidBtn = document.getElementById('yid-toggle');
+yidBtn.addEventListener('mousedown', e => e.preventDefault()); // keep focus in the box
+yidBtn.addEventListener('click', () => {
+  setYiddish(!yiddishOn);
+  document.getElementById('search-input').focus();
+});
+updateYiddishUI();
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 // Restore the last-used dictionary scope (if any) and show/hide columns

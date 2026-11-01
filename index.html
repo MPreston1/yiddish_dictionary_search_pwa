@@ -696,8 +696,6 @@ function doSearch() {
   const qNorm  = normalizeYiddish(query.toLowerCase());
   const tokens = qNorm.split(/\s+/).filter(Boolean);
 
-  const WB_PRE  = '(?<![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
-  const WB_POST = '(?![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
 
   function entryMatches(term, defnText) {
     const t = normalizeYiddish(term.toLowerCase());
@@ -728,10 +726,15 @@ function doSearch() {
   // For exact-phrase mode, highlight only the full phrase as one unit.
   // For normal mode, highlight each individual token.
   const hlTokens = exactPhrase ? [qNorm] : tokens;
-  renderResults(currentMatches, hlTokens);
+  renderResults(currentMatches, hlTokens, wholeWord);
   // Reset find state
   closeFind(true);
 }
+
+// Shared word-boundary definition: used by both the whole-word filters and
+// the whole-word highlighter, so they can't disagree about what a "word" is.
+const WB_PRE  = '(?<![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
+const WB_POST = '(?![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
 
 function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
@@ -752,7 +755,7 @@ function applyDictScope() {
 }
 
 // ── Rendering ─────────────────────────────────────────────────────────────────
-function renderResults(entries, tokens) {
+function renderResults(entries, tokens, wholeWord = false) {
   const container = document.getElementById('results-ycd');
   if (!entries.length) {
     container.innerHTML = '<p class="message">No matches found.</p>';
@@ -767,14 +770,14 @@ function renderResults(entries, tokens) {
     // Term
     const termDiv = document.createElement('div');
     termDiv.className = 'term';
-    termDiv.innerHTML = highlightTokens(bidiTermDisplay(entry.term), tokens);
+    termDiv.innerHTML = highlightTokens(bidiTermDisplay(entry.term), tokens, wholeWord);
     div.appendChild(termDiv);
 
     // Definition paragraphs
     for (const para of entry.definition) {
       const p = document.createElement('div');
       p.className = 'defpara';
-      p.innerHTML = highlightTokens(para, tokens);
+      p.innerHTML = highlightTokens(para, tokens, wholeWord);
       div.appendChild(p);
     }
 
@@ -784,7 +787,7 @@ function renderResults(entries, tokens) {
   container.appendChild(frag);
 }
 
-function highlightTokens(text, tokens) {
+function highlightTokens(text, tokens, wholeWord = false) {
   if (!tokens || !tokens.length) return escapeHTML(text);
 
   // Find match positions against the normalized text (so e.g. ײ/יי and
@@ -796,12 +799,23 @@ function highlightTokens(text, tokens) {
   const lower = normalized.toLowerCase();
   const ranges = [];
   for (const token of tokens) {
-    let pos = 0;
-    while (true) {
-      const idx = lower.indexOf(token, pos);
-      if (idx === -1) break;
-      ranges.push([idx, idx + token.length]);
-      pos = idx + token.length;
+    if (wholeWord) {
+      // Only highlight occurrences bounded by non-word characters, matching
+      // the whole-word filter used when selecting results.
+      const re = new RegExp(WB_PRE + escapeRegex(token) + WB_POST, 'gu');
+      let m;
+      while ((m = re.exec(lower)) !== null) {
+        ranges.push([m.index, m.index + m[0].length]);
+        if (m[0].length === 0) re.lastIndex++;
+      }
+    } else {
+      let pos = 0;
+      while (true) {
+        const idx = lower.indexOf(token, pos);
+        if (idx === -1) break;
+        ranges.push([idx, idx + token.length]);
+        pos = idx + token.length;
+      }
     }
   }
   if (!ranges.length) return escapeHTML(text);
@@ -1034,7 +1048,7 @@ async function searchJNW(query, opts = {}) {
     row.className = 'jnw-term-row';
     const term = document.createElement('span');
     term.className = 'jnw-term';
-    term.innerHTML = highlightTokens(entry.term, hlTokensJ) + (entry.toevoeg ? ` (${escapeHTML(entry.toevoeg)})` : '');
+    term.innerHTML = highlightTokens(entry.term, hlTokensJ, wholeWord) + (entry.toevoeg ? ` (${escapeHTML(entry.toevoeg)})` : '');
     row.appendChild(term);
     if (entry.href) {
       const a = document.createElement('a');
@@ -1062,7 +1076,7 @@ async function searchJNW(query, opts = {}) {
     if (entry.translation) {
       const trans = document.createElement('div');
       trans.className = 'jnw-snippet';
-      trans.innerHTML = highlightTokens(entry.translation, hlTokensJ);
+      trans.innerHTML = highlightTokens(entry.translation, hlTokensJ, wholeWord);
       div.appendChild(trans);
     }
     frag.appendChild(div);
@@ -1083,8 +1097,6 @@ function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
   const clean = s => s.replace(/[\u200e\u200f]/g, '').replace(/\s+/g, ' ').trim();
 
   const qNorm = clean(normalizeYiddish(query.toLowerCase()));
-  const WB_PRE  = '(?<![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
-  const WB_POST = '(?![\\w\u0590-\u05ff\ufb1d-\ufb4f])';
 
   // The baseline (always applied unless "Display all" is checked) requires
   // the searched words to appear adjacent and in order in the headword —

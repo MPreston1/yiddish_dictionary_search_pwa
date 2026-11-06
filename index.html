@@ -84,6 +84,8 @@
   .jnw-open { font-size: 11px; color: var(--muted); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
   .jnw-snippet { font-size: 13px; color: var(--text); line-height: 1.5; }
   .jnw-meta { font-size: 12px; color: var(--muted); direction: ltr; unicode-bidi: embed; margin-bottom: 2px; }
+  .jnw-belongs { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+  .jnw-belongs .jnw-belongs-term { direction: rtl; unicode-bidi: embed; font-weight: 600; color: var(--accent); }
   .jnw-kenmerk { font-size: 12px; font-style: italic; color: var(--muted); margin-bottom: 2px; }
   .jnw-fallback { font-size: 12px; color: var(--muted); padding: 8px 2px; line-height: 1.5; }
   .jnw-fallback a { color: var(--accent); }
@@ -1062,6 +1064,14 @@ async function searchJNW(query, opts = {}) {
     }
     div.appendChild(row);
 
+    if (entry.belongsTo && entry.belongsTo.length) {
+      const bel = document.createElement('div');
+      bel.className = 'jnw-belongs';
+      bel.innerHTML = 'belongs to: ' + entry.belongsTo
+        .map(b => `<span class="jnw-belongs-term">${highlightTokens(b, hlTokensJ, wholeWord)}</span>`)
+        .join(', ');
+      div.appendChild(bel);
+    }
     if (entry.meta) {
       const meta = document.createElement('div');
       meta.className = 'jnw-meta';
@@ -1109,8 +1119,11 @@ function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
     : null;
 
   return entries.filter(e => {
-    const t = clean(normalizeYiddish((e.term || '').toLowerCase()));
-    return wholeWord ? re.test(t) : t.includes(qNorm);
+    // Also match the headword(s) a phrase belongs to, so searching a
+    // keyword surfaces its "~ ..." phrases too.
+    const candidates = [e.term || '', ...(e.belongsTo || [])]
+      .map(x => clean(normalizeYiddish(x.toLowerCase())));
+    return candidates.some(t => wholeWord ? re.test(t) : t.includes(qNorm));
   });
 }
 
@@ -1186,6 +1199,12 @@ function parseJNWApiResponse(raw) {
 
     const toevoeg = Array.isArray(r.toevoeg) ? r.toevoeg.join(', ') : '';
 
+    // hoort_bij_trefwoord (present on example phrases / sub-entries such as
+    // "~ אין האַרצן") lists the headword(s) the phrase belongs to — the "~"
+    // stands for that headword.
+    const belongsTo = (Array.isArray(r.hoort_bij_trefwoord) ? r.hoort_bij_trefwoord : (typeof r.hoort_bij_trefwoord === 'string' ? [r.hoort_bij_trefwoord] : []))
+      .map(x => String(x).replace(/[\u200e\u200f]/g, '').trim()).filter(Boolean);
+
     // kenmerk (not always present) — a short grammatical/usage tag JNW
     // attaches to some entries. Not a top-level field on search hits; it's
     // embedded inside the `xml` field, so it's pulled out from there.
@@ -1207,7 +1226,7 @@ function parseJNWApiResponse(raw) {
       ? `https://jiddischwoordenboek.nl/api${r.url.startsWith('/') ? '' : '/'}${r.url}`
       : (r.pid ? `https://jiddischwoordenboek.nl/api/docs/${r.pid}` : null);
 
-    entries.push({ term, toevoeg, kenmerk, meta, translation, href });
+    entries.push({ term, toevoeg, kenmerk, meta, translation, href, belongsTo });
   }
   return { entries, numFound };
 }
@@ -1307,7 +1326,7 @@ function searchJNWLocalBackup(query) {
   const qNorm = normalizeYiddish(query.toLowerCase()).trim();
   const all = window._jnwBackupEntries || [];
   const entries = all.filter(e => {
-    const hay = normalizeYiddish(`${e.term || ''} ${e.toevoeg || ''} ${e.translation || ''}`.toLowerCase());
+    const hay = normalizeYiddish(`${e.term || ''} ${(e.belongsTo || []).join(' ')} ${e.toevoeg || ''} ${e.translation || ''}`.toLowerCase());
     return hay.includes(qNorm);
   });
   return { entries, numFound: entries.length };

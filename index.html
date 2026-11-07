@@ -94,6 +94,8 @@
   .jnw-ex-trans { font-size: 13px; line-height: 1.4; }
   .jnw-ex-see { font-size: 12px; color: var(--muted); }
   .jnw-ex-see span { direction: rtl; unicode-bidi: embed; }
+  .jnw-seealso { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .jnw-seealso .jnw-seealso-term { direction: rtl; unicode-bidi: embed; font-weight: 600; color: var(--accent); }
   .jnw-kenmerk { font-size: 12px; font-style: italic; color: var(--muted); margin-bottom: 2px; }
   .jnw-fallback { font-size: 12px; color: var(--muted); padding: 8px 2px; line-height: 1.5; }
   .jnw-fallback a { color: var(--accent); }
@@ -1098,6 +1100,14 @@ async function searchJNW(query, opts = {}) {
       trans.innerHTML = highlightTokens(entry.translation, hlTokensJ, wholeWord);
       div.appendChild(trans);
     }
+    if (entry.seeAlso && entry.seeAlso.length) {
+      const see = document.createElement('div');
+      see.className = 'jnw-seealso';
+      see.innerHTML = 'see also: ' + entry.seeAlso
+        .map(x => `<span class="jnw-seealso-term">${escapeHTML(x)}</span>`)
+        .join(' · ');
+      div.appendChild(see);
+    }
     if (entry.examples && entry.examples.length) {
       const box = document.createElement('div');
       box.className = 'jnw-examples';
@@ -1107,7 +1117,7 @@ async function searchJNW(query, opts = {}) {
           `<div class="jnw-ex-phrase">${highlightTokens(ex.phrase, hlTokensJ, wholeWord)}</div>` +
           (ex.pron ? `<div class="jnw-ex-pron">${formatJNWMarkup(ex.pron)}</div>` : '') +
           (ex.translation ? `<div class="jnw-ex-trans">${highlightTokens(ex.translation, hlTokensJ, wholeWord)}</div>` : '') +
-          (ex.seeAlso ? `<div class="jnw-ex-see">see: <span>${escapeHTML(ex.seeAlso)}</span></div>` : '') +
+          (ex.seeAlso ? `<div class="jnw-ex-see">see also: <span>${escapeHTML(ex.seeAlso)}</span></div>` : '') +
           '</div>';
       }
       box.innerHTML = html;
@@ -1217,6 +1227,17 @@ function extractExamplesFromXml(xmlStr) {
   }
 }
 
+function extractSeeAlsoFromXml(xmlStr) {
+  if (!xmlStr || typeof xmlStr !== 'string') return [];
+  try {
+    const doc = new DOMParser().parseFromString(xmlStr, 'text/xml');
+    if (doc.querySelector('parsererror')) return [];
+    return Array.from(doc.querySelectorAll('trefregel > doorverw')).map(el => el.textContent.trim()).filter(Boolean);
+  } catch (e) {
+    return [];
+  }
+}
+
 function jnwFieldText(v) {
   if (Array.isArray(v)) return v.filter(Boolean).join(' ');
   if (typeof v === 'string') return v.trim();
@@ -1257,6 +1278,13 @@ function parseJNWApiResponse(raw) {
     const kenmerk = extractKenmerkFromXml(r.xml);
     const examples = extractExamplesFromXml(r.xml);
 
+    // doorverw ("see also"): top-level array of related headwords/phrases.
+    // Fall back to the entry's own <trefregel><doorverw> elements in the xml
+    // (example phrases' own doorverw are handled separately, per example).
+    let seeAlso = Array.isArray(r.doorverw) ? r.doorverw : (typeof r.doorverw === 'string' ? [r.doorverw] : []);
+    if (!seeAlso.length) seeAlso = extractSeeAlsoFromXml(r.xml);
+    seeAlso = seeAlso.map(x => String(x).replace(/[\u200e\u200f]/g, '').trim()).filter(Boolean);
+
     // uitspraak_naklik (not always present) is displayed as a continuation
     // of uitspraak, not as a separate field.
     const uitspraakText = Array.isArray(r.uitspraak) && r.uitspraak.length
@@ -1273,7 +1301,7 @@ function parseJNWApiResponse(raw) {
       ? `https://jiddischwoordenboek.nl/api${r.url.startsWith('/') ? '' : '/'}${r.url}`
       : (r.pid ? `https://jiddischwoordenboek.nl/api/docs/${r.pid}` : null);
 
-    entries.push({ term, toevoeg, kenmerk, meta, translation, href, belongsTo, examples });
+    entries.push({ term, toevoeg, kenmerk, meta, translation, href, belongsTo, examples, seeAlso });
   }
   return { entries, numFound };
 }

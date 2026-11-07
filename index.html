@@ -1104,7 +1104,7 @@ async function searchJNW(query, opts = {}) {
       const see = document.createElement('div');
       see.className = 'jnw-seealso';
       see.innerHTML = 'see also: ' + entry.seeAlso
-        .map(x => `<span class="jnw-seealso-term">${escapeHTML(x)}</span>`)
+        .map(x => `<span class="jnw-seealso-term">${highlightTokens(x, hlTokensJ, wholeWord)}</span>`)
         .join(' · ');
       div.appendChild(see);
     }
@@ -1117,7 +1117,7 @@ async function searchJNW(query, opts = {}) {
           `<div class="jnw-ex-phrase">${highlightTokens(ex.phrase, hlTokensJ, wholeWord)}</div>` +
           (ex.pron ? `<div class="jnw-ex-pron">${formatJNWMarkup(ex.pron)}</div>` : '') +
           (ex.translation ? `<div class="jnw-ex-trans">${highlightTokens(ex.translation, hlTokensJ, wholeWord)}</div>` : '') +
-          (ex.seeAlso ? `<div class="jnw-ex-see">see also: <span>${escapeHTML(ex.seeAlso)}</span></div>` : '') +
+          (ex.seeAlso ? `<div class="jnw-ex-see">see also: <span>${highlightTokens(ex.seeAlso, hlTokensJ, wholeWord)}</span></div>` : '') +
           '</div>';
       }
       box.innerHTML = html;
@@ -1154,7 +1154,9 @@ function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
   return entries.filter(e => {
     // Also match the headword(s) a phrase belongs to, so searching a
     // keyword surfaces its "~ ..." phrases too.
-    const candidates = [e.term || '', ...(e.belongsTo || [])]
+    // ...and any see-also (doorverw) terms, on the entry or its examples.
+    const candidates = [e.term || '', ...(e.belongsTo || []), ...(e.seeAlso || []),
+                        ...(e.examples || []).map(x => x.seeAlso || '').filter(Boolean)]
       .map(x => clean(normalizeYiddish(x.toLowerCase())));
     return candidates.some(t => wholeWord ? re.test(t) : t.includes(qNorm));
   });
@@ -1401,7 +1403,7 @@ function searchJNWLocalBackup(query) {
   const qNorm = normalizeYiddish(query.toLowerCase()).trim();
   const all = window._jnwBackupEntries || [];
   const entries = all.filter(e => {
-    const hay = normalizeYiddish(`${e.term || ''} ${(e.belongsTo || []).join(' ')} ${e.toevoeg || ''} ${e.translation || ''}`.toLowerCase());
+    const hay = normalizeYiddish(`${e.term || ''} ${(e.belongsTo || []).join(' ')} ${(e.seeAlso || []).join(' ')} ${(e.examples || []).map(x => x.seeAlso || '').join(' ')} ${e.toevoeg || ''} ${e.translation || ''}`.toLowerCase());
     return hay.includes(qNorm);
   });
   return { entries, numFound: entries.length };

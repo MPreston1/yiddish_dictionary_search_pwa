@@ -982,7 +982,23 @@ async function searchJNW(query, opts = {}) {
   countEl.textContent = '';
 
   const webUrl = jnwWebUrl(query);
-  const offline = jnwOfflineModeActive();
+  // Use the local backup if the person turned on offline mode in Settings,
+  // or automatically when the device reports no connection. (If the device
+  // *claims* to be online but JNW can't be reached, there's a second
+  // fallback below.)
+  const hasBackup = Array.isArray(window._jnwBackupEntries) && window._jnwBackupEntries.length > 0;
+  let offline = jnwOfflineModeActive();
+  let autoNote = '';
+  if (!offline && navigator.onLine === false) {
+    if (hasBackup) {
+      offline = true;
+      autoNote = 'no internet connection';
+    } else {
+      container.innerHTML = '<div class="jnw-fallback">No internet connection, and no local JNW backup is loaded. ' +
+        'Import or crawl a backup in Settings to search JNW offline.</div>';
+      return;
+    }
+  }
 
   let entries, numFound;
 
@@ -992,6 +1008,13 @@ async function searchJNW(query, opts = {}) {
     const result = await fetchJNWLivePaged(query, JNW_LIVE_FETCH_CAP);
     if (token !== jnwSearchToken) return; // a newer search superseded this one
 
+    if (result.firstPageError && hasBackup) {
+      // Navigator said "online" but JNW (and every proxy) failed — e.g.
+      // captive portal, bad signal. Fall back to the local backup.
+      offline = true;
+      autoNote = "couldn't reach JNW";
+      ({ entries, numFound } = searchJNWLocalBackup(query));
+    } else {
     if (result.firstPageError) {
       container.innerHTML = `<div class="jnw-fallback">Couldn't reach JNW (${escapeHTML(result.firstPageError.message)}).
         <a href="${webUrl}" target="_blank" rel="noopener">Search on jiddischwoordenboek.nl ↗</a></div>`;
@@ -1014,7 +1037,10 @@ async function searchJNW(query, opts = {}) {
     }
 
     ({ entries, numFound } = result);
+    }
   }
+
+  const offlineSuffix = offline ? (autoNote ? ` (offline backup — ${autoNote})` : ' (offline backup)') : '';
 
   // JNW's own API has no "whole word" / "exact phrase" options, and its
   // own matching logic is broader than a literal headword match (it seems
@@ -1041,7 +1067,7 @@ async function searchJNW(query, opts = {}) {
     container.innerHTML = '<p class="message">No matches found.</p>';
     countEl.textContent = (displayAll
       ? `0 matches for "${query}"`
-      : `0 of ${entries.length.toLocaleString()} fetched match${entries.length !== 1 ? 'es' : ''}${fetchedNote}`) + (offline ? ' (offline backup)' : '');
+      : `0 of ${entries.length.toLocaleString()} fetched match${entries.length !== 1 ? 'es' : ''}${fetchedNote}`) + offlineSuffix;
     return;
   }
 
@@ -1050,7 +1076,7 @@ async function searchJNW(query, opts = {}) {
     : (filtered.length < numFound
         ? `${filtered.length.toLocaleString()} of ${numFound.toLocaleString()} matches shown`
         : `${filtered.length.toLocaleString()} match${filtered.length !== 1 ? 'es' : ''} for "${query}"`);
-  countEl.textContent = shown + (offline ? ' (offline backup)' : '');
+  countEl.textContent = shown + offlineSuffix;
 
   const frag = document.createDocumentFragment();
   for (const entry of filtered) {

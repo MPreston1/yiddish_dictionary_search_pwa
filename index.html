@@ -1051,9 +1051,9 @@ async function searchJNW(query, opts = {}) {
   // filter is additionally required to land on word boundaries (which,
   // combined with the phrase-adjacency the default already requires, is
   // the same "both conditions together" combination used on the YCD side).
-  const filtered = displayAll
-    ? entries
-    : filterJNWEntriesByTerm(entries, query, { wholeWord });
+  // Always run through the ranker so main-term matches come first; with
+  // "Display all", non-matching entries are kept too (listed last).
+  const filtered = filterJNWEntriesByTerm(entries, query, { wholeWord, keepAll: displayAll });
 
   const fetchedNote = entries.length < numFound ? ` (${numFound.toLocaleString()} total on JNW)` : '';
 
@@ -1159,7 +1159,7 @@ async function searchJNW(query, opts = {}) {
 // since JNW's own matching is broader than a literal headword match and
 // its API doesn't support whole-word/exact-phrase options. Called for
 // every search unless "Display all" is checked (see searchJNW).
-function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
+function filterJNWEntriesByTerm(entries, query, { wholeWord, keepAll = false }) {
   // Strip bidi control marks (e.g. U+200F RLM, which JNW embeds in some
   // trefwoord_naklik values) and collapse the resulting whitespace runs
   // down to single spaces, so a plain-typed query matches an entry whose
@@ -1177,15 +1177,28 @@ function filterJNWEntriesByTerm(entries, query, { wholeWord }) {
     ? new RegExp(WB_PRE + escapeRegex(qNorm) + WB_POST, 'u')
     : null;
 
-  return entries.filter(e => {
-    // Also match the headword(s) a phrase belongs to, so searching a
-    // keyword surfaces its "~ ..." phrases too.
-    // ...and any see-also (doorverw) terms, on the entry or its examples.
-    const candidates = [e.term || '', ...(e.belongsTo || []), ...(e.seeAlso || []),
-                        ...(e.examples || []).map(x => x.seeAlso || '').filter(Boolean)]
-      .map(x => clean(normalizeYiddish(x.toLowerCase())));
-    return candidates.some(t => wholeWord ? re.test(t) : t.includes(qNorm));
-  });
+  const norm  = x => clean(normalizeYiddish(String(x || '').toLowerCase()));
+  const hits  = t => wholeWord ? re.test(t) : t.includes(qNorm);
+  const anyHit = arr => arr.some(x => hits(norm(x)));
+
+  // Ranking — lower comes first:
+  //   0  the main term (headword) itself matches
+  //   1  the headword a phrase "belongs to" matches
+  //   2  a see-also (doorverw) term matches, on the entry or on one of its examples
+  //   3  no match at all (only kept when "Display all" is checked)
+  // Entries keep JNW's own order within each rank (the sort is stable).
+  const rankOf = e => {
+    if (hits(norm(e.term))) return 0;
+    if (anyHit(e.belongsTo || [])) return 1;
+    if (anyHit(e.seeAlso || []) || anyHit((e.examples || []).map(x => x.seeAlso || '').filter(Boolean))) return 2;
+    return 3;
+  };
+
+  return entries
+    .map((e, i) => ({ e, i, r: rankOf(e) }))
+    .filter(x => keepAll || x.r < 3)
+    .sort((a, b) => a.r - b.r || a.i - b.i)
+    .map(x => x.e);
 }
 
 // Parses a response from https://jiddischwoordenboek.nl/api/search, whose

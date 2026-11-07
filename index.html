@@ -86,6 +86,14 @@
   .jnw-meta { font-size: 12px; color: var(--muted); direction: ltr; unicode-bidi: embed; margin-bottom: 2px; }
   .jnw-belongs { font-size: 12px; color: var(--muted); margin-bottom: 2px; }
   .jnw-belongs .jnw-belongs-term { direction: rtl; unicode-bidi: embed; font-weight: 600; color: var(--accent); }
+  .jnw-examples { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border); }
+  .jnw-examples-label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 3px; }
+  .jnw-example { padding: 3px 0 3px 10px; border-left: 2px solid var(--border); margin-bottom: 4px; }
+  .jnw-ex-phrase { font-size: 14px; font-weight: 600; direction: rtl; text-align: right; unicode-bidi: embed; }
+  .jnw-ex-pron { font-size: 12px; color: var(--muted); direction: ltr; unicode-bidi: embed; }
+  .jnw-ex-trans { font-size: 13px; line-height: 1.4; }
+  .jnw-ex-see { font-size: 12px; color: var(--muted); }
+  .jnw-ex-see span { direction: rtl; unicode-bidi: embed; }
   .jnw-kenmerk { font-size: 12px; font-style: italic; color: var(--muted); margin-bottom: 2px; }
   .jnw-fallback { font-size: 12px; color: var(--muted); padding: 8px 2px; line-height: 1.5; }
   .jnw-fallback a { color: var(--accent); }
@@ -1090,6 +1098,21 @@ async function searchJNW(query, opts = {}) {
       trans.innerHTML = highlightTokens(entry.translation, hlTokensJ, wholeWord);
       div.appendChild(trans);
     }
+    if (entry.examples && entry.examples.length) {
+      const box = document.createElement('div');
+      box.className = 'jnw-examples';
+      let html = `<div class="jnw-examples-label">Examples (${entry.examples.length})</div>`;
+      for (const ex of entry.examples) {
+        html += '<div class="jnw-example">' +
+          `<div class="jnw-ex-phrase">${highlightTokens(ex.phrase, hlTokensJ, wholeWord)}</div>` +
+          (ex.pron ? `<div class="jnw-ex-pron">${formatJNWMarkup(ex.pron)}</div>` : '') +
+          (ex.translation ? `<div class="jnw-ex-trans">${highlightTokens(ex.translation, hlTokensJ, wholeWord)}</div>` : '') +
+          (ex.seeAlso ? `<div class="jnw-ex-see">see: <span>${escapeHTML(ex.seeAlso)}</span></div>` : '') +
+          '</div>';
+      }
+      box.innerHTML = html;
+      div.appendChild(box);
+    }
     frag.appendChild(div);
   }
   container.innerHTML = '';
@@ -1171,6 +1194,29 @@ function extractKenmerkFromXml(xmlStr) {
   }
 }
 
+// A parent entry's example phrases (<voorbeeldregel> elements) aren't
+// separate top-level fields on a search hit; like kenmerk they only exist
+// inside the `xml` string. Each has: voorbeeld (the phrase, with "~"
+// standing for the headword), uitspraak, vert_zoek/vertaling, and
+// sometimes doorverw (a "see also" pointer to another phrase).
+function extractExamplesFromXml(xmlStr) {
+  if (!xmlStr || typeof xmlStr !== 'string') return [];
+  try {
+    const doc = new DOMParser().parseFromString(xmlStr, 'text/xml');
+    if (doc.querySelector('parsererror')) return [];
+    const txt = (el, sel) => el.querySelector(sel)?.textContent?.trim() || '';
+    return Array.from(doc.querySelectorAll('voorbeeldregel')).map(el => ({
+      phrase: txt(el, 'voorbeeld'),
+      pron: txt(el, 'uitspraak'),
+      // vert_zoek is the same text without [b]/[br] markup
+      translation: txt(el, 'vert_zoek') || txt(el, 'vertaling').replace(/\[br\]/g, ' ').replace(/\[\/?b\]/g, ''),
+      seeAlso: txt(el, 'doorverw'),
+    })).filter(x => x.phrase);
+  } catch (e) {
+    return [];
+  }
+}
+
 function jnwFieldText(v) {
   if (Array.isArray(v)) return v.filter(Boolean).join(' ');
   if (typeof v === 'string') return v.trim();
@@ -1209,6 +1255,7 @@ function parseJNWApiResponse(raw) {
     // attaches to some entries. Not a top-level field on search hits; it's
     // embedded inside the `xml` field, so it's pulled out from there.
     const kenmerk = extractKenmerkFromXml(r.xml);
+    const examples = extractExamplesFromXml(r.xml);
 
     // uitspraak_naklik (not always present) is displayed as a continuation
     // of uitspraak, not as a separate field.
@@ -1226,7 +1273,7 @@ function parseJNWApiResponse(raw) {
       ? `https://jiddischwoordenboek.nl/api${r.url.startsWith('/') ? '' : '/'}${r.url}`
       : (r.pid ? `https://jiddischwoordenboek.nl/api/docs/${r.pid}` : null);
 
-    entries.push({ term, toevoeg, kenmerk, meta, translation, href, belongsTo });
+    entries.push({ term, toevoeg, kenmerk, meta, translation, href, belongsTo, examples });
   }
   return { entries, numFound };
 }

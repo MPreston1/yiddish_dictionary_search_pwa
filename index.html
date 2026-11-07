@@ -1182,21 +1182,23 @@ function filterJNWEntriesByTerm(entries, query, { wholeWord, keepAll = false }) 
   const anyHit = arr => arr.some(x => hits(norm(x)));
 
   // Ranking — lower comes first:
-  //   0  the main term (headword) itself matches
-  //   1  the headword a phrase "belongs to" matches
-  //   2  a see-also (doorverw) term matches, on the entry or on one of its examples
-  //   3  no match at all (only kept when "Display all" is checked)
+  //   0  the main term matches and the entry is a real headword (no belongsTo)
+  //   1  the main term matches but it's a phrase that belongs to another keyword
+  //   2  the keyword a phrase "belongs to" matches
+  //   3  a see-also (doorverw) term matches, on the entry or on one of its examples
+  //   4  no match at all (only kept when "Display all" is checked)
   // Entries keep JNW's own order within each rank (the sort is stable).
   const rankOf = e => {
-    if (hits(norm(e.term))) return 0;
-    if (anyHit(e.belongsTo || [])) return 1;
-    if (anyHit(e.seeAlso || []) || anyHit((e.examples || []).map(x => x.seeAlso || '').filter(Boolean))) return 2;
-    return 3;
+    const isPhrase = (e.belongsTo || []).length > 0;
+    if (hits(norm(e.term))) return isPhrase ? 1 : 0;
+    if (anyHit(e.belongsTo || [])) return 2;
+    if (anyHit(e.seeAlso || []) || anyHit((e.examples || []).map(x => x.seeAlso || '').filter(Boolean))) return 3;
+    return 4;
   };
 
   return entries
     .map((e, i) => ({ e, i, r: rankOf(e) }))
-    .filter(x => keepAll || x.r < 3)
+    .filter(x => keepAll || x.r < 4)
     .sort((a, b) => a.r - b.r || a.i - b.i)
     .map(x => x.e);
 }
